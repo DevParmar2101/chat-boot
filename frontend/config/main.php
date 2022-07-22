@@ -6,6 +6,7 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
+$baseurl = str_replace('frontend/web','',(new \yii\web\Request())->getBaseUrl());
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
@@ -13,6 +14,7 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
+            'baseUrl' => $baseurl,
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
@@ -36,14 +38,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
+            'baseUrl' => $baseurl,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
