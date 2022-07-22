@@ -1,4 +1,8 @@
 <?php
+
+use yii\bootstrap4\BootstrapAsset;
+use yii\bootstrap4\BootstrapPluginAsset;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -37,6 +41,17 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+
+        'assetManager' => [
+            'bundles' => [
+                BootstrapPluginAsset::class => [
+                    'js' => [],
+                ],
+                BootstrapAsset::class => [
+                    'css' => [],
+                ],
+            ],
         ],
 
         'urlManager' => [
