@@ -38,8 +38,11 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
+            [['first_name','last_name','profile_image'],'required'],
             [['first_name','last_name','profile_image'],'string', 'min' => 2, 'max' => 255],
+            ['gender','required'],
             [['gender'],'integer', 'max' => 1],
+            ['age','required'],
             ['age','integer','max' => 4],
 
             ['password', 'required'],
