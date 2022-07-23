@@ -34,6 +34,15 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    const MALE = 1;
+    const FEMALE = 2;
+    const OTHERS = 3;
+    const ALIEN = 4;
+
+    const MALE_GENDER = 'Male';
+    const FEMALE_GENDER = 'Female';
+    const OTHERS_GENDER = 'Other';
+    const ALIEN_GENDER = 'Alien';
 
     /**
      * {@inheritdoc}
@@ -214,5 +223,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function gender()
+    {
+        $array = [
+            self::MALE => self::MALE_GENDER,
+            self::FEMALE => self::FEMALE_GENDER,
+            self::OTHERS => self::OTHERS_GENDER,
+            self::ALIEN  => self::ALIEN_GENDER,
+        ];
+        return $array;
     }
 }
