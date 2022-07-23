@@ -41,9 +41,9 @@ class SignupForm extends Model
             [['first_name','last_name','profile_image'],'required'],
             [['first_name','last_name','profile_image'],'string', 'min' => 2, 'max' => 255],
             ['gender','required'],
-            [['gender'],'integer', 'max' => 1],
+            [['gender'],'integer'],
             ['age','required'],
-            ['age','integer','max' => 4],
+            ['age','integer'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
@@ -57,18 +57,20 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if (!$this->validate()) {
-            return null;
-        }
-        
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
 
-        return $user->save() && $this->sendEmail($user);
+        if (!$this->validate()) {
+
+
+            $user = new User();
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            $user->generateEmailVerificationToken();
+
+            $user->save();
+            return $this->sendEmail($user);
+        }
     }
 
     /**

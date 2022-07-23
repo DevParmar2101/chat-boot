@@ -28,7 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <?= $form->field($model,'gender')->textInput()?>
+                    <?= $form->field($model,'gender')->widget(\kartik\select2\Select2::class,[
+                            'data' => \common\models\User::gender(),
+                            'options' => ['placeholder' => 'Select Gender'],
+                            'pluginOptions' => [
+                                    'allowClear' => true
+                            ]
+                    ])?>
                 </div>
                 <div class="col-lg-6">
                     <?= $form->field($model,'age')->textInput(['type' => 'number'])?>
