@@ -10,7 +10,7 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
-$baseurl = str_replace('frontend/web','',(new \yii\web\Request())->getBaseUrl());
+$baseurl = str_replace('/frontend/web','',(new \yii\web\Request())->getBaseUrl());
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
@@ -43,16 +43,6 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        'assetManager' => [
-            'bundles' => [
-                BootstrapPluginAsset::class => [
-                    'js' => [],
-                ],
-                BootstrapAsset::class => [
-                    'css' => [],
-                ],
-            ],
-        ],
 
         'urlManager' => [
             'baseUrl' => $baseurl,
