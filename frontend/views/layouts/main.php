@@ -30,7 +30,7 @@ AppAsset::register($this);
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#"><?= Yii::$app->name?></a>
+        <a class="navbar-brand" href="<?= Url::toRoute('/site/index')?>"><?= Yii::$app->name?></a>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -39,7 +39,7 @@ AppAsset::register($this);
             <ul class="navbar-nav my-2 my-lg-0">
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= Url::toRoute('/')?>">Home</a>
+                        <a class="nav-link text-white" href="<?= Url::toRoute('/site/index')?>">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="<?= Url::toRoute('/site/about')?>">About</a>
@@ -48,9 +48,9 @@ AppAsset::register($this);
                         <a class="nav-link text-white" href="<?= Url::toRoute('/site/contact')?>">Contact</a>
                     </li>
                 </ul>
-                <div class="dropdown btn btn-sm btn-outline-secondary">
+                <div class="dropdown">
                     <a class="nav-link dropdown-toggle profile-header-dropdown" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?= Yii::$app->user->identity->username ?>
+                        <?= Yii::$app->user->identity->username?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<?= Url::toRoute('site/profile')?>">Profile</a>
