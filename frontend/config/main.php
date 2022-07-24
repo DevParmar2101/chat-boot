@@ -12,6 +12,7 @@ $params = array_merge(
 
 $baseurl = str_replace('/frontend/web','',(new \yii\web\Request())->getBaseUrl());
 return [
+    'name' => 'Chat Boot',
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
