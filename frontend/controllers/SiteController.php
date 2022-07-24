@@ -17,6 +17,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -264,12 +265,32 @@ class SiteController extends Controller
         if (!is_dir($path)) {
             FileHelper::createDirectory($path,$mode= 777,$recursive = true);
         }
+
         $profile_image = null;
         $model = User::findOne(['id' => Yii::$app->user->id]);
+
         if ($model->profile_image) {
-            $profile = $model->profile_image;
+            $profile_image = $model->profile_image;
         }
 
+        if ($model->load(Yii::$app->request->post())){
+            $profile = UploadedFile::getInstance($model,'profile_image');
+
+            if ($profile) {
+                $model->profile_image = $model->getImageName($profile);
+            }else{
+                $model->profile_image = $profile_image;
+            }
+
+            if ($model->save()) {
+                if ($profile) {
+                    $profile->saveAs(User::getPath($model->profile_image));
+                }
+                Yii::$app->session->setFlash('success','Profile updated successfully!');
+                return $this->redirect(['index']);
+            }
+
+        }
         return $this->render('profile',[
             'model' => $model
         ]);

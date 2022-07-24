@@ -78,6 +78,9 @@ class User extends BaseActiveRecord implements IdentityInterface
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
+            [['profile_image'],'file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
+            [['profile_image'],'string', 'max' => 255],
+
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
@@ -86,13 +89,13 @@ class User extends BaseActiveRecord implements IdentityInterface
 
             [['first_name','last_name'],'required'],
             [['profile_image'],'safe'],
-            [['first_name','last_name','profile_image'],'string', 'min' => 2, 'max' => 255],
+            [['first_name','last_name'],'string', 'min' => 2, 'max' => 255],
             ['gender','required'],
             [['gender'],'integer'],
             ['age','required'],
             ['age','integer'],
 
-            ['password', 'required'],
+            ['password', 'safe'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
@@ -124,6 +127,10 @@ class User extends BaseActiveRecord implements IdentityInterface
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
+    public function getPassword()
+    {
+        return '';
+    }
     /**
      * Finds user by password reset token
      *

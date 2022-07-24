@@ -1,5 +1,7 @@
 <?php
 
+use kartik\file\FileInput;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 
@@ -24,7 +26,7 @@ $this->title = 'User Profile';
                 <?= $form->field($model,'age')->textInput(['type' => 'number'])?>
             </div>
             <div class="col-sm-6 col-12">
-                <?= $form->field($model,'gender')->widget(\kartik\select2\Select2::class,[
+                <?= $form->field($model,'gender')->widget(Select2::class,[
                     'data' => $model->gender(),
                     'options' => [
                         'placeholder' => 'Select Gender',
@@ -38,7 +40,7 @@ $this->title = 'User Profile';
                 <?= $form->field($model,'email')->textInput()?>
             </div>
             <div class="col-sm-6 col-12">
-                <?= $form->field($model,'status')->widget(\kartik\select2\Select2::class,[
+                <?= $form->field($model,'status')->widget(Select2::class,[
                     'data' => $model->status(),
                     'options' => [
                         'placeholder' => 'Select Status',
@@ -49,8 +51,10 @@ $this->title = 'User Profile';
         </div>
         <div class="row">
             <div class="col-sm-12 col-12">
-                <?= $form->field($model,'profile_image')->widget(\kartik\file\FileInput::class,[
+                <?= $form->field($model,'profile_image')->widget(FileInput::class,[
                     'pluginOptions' => [
+                        'initialPreviewData' => true,
+                        'initialPreview' => Html::img(Yii::getAlias('@web/uploads/user/'.$model->profile_image),['class' => 'image-thumbnail']),
                         'showUpload' => false,
                         'browseLabel' => '',
                         'removeLabel' => '',
