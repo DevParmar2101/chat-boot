@@ -90,4 +90,7 @@ a.desc:after {
 }
 .profile-header-dropdown{
     color: white !important;
+    background-color: #575656;
+    border-radius: 5px;
+    border: white 1px solid;
 }
