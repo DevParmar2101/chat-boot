@@ -1,24 +1,22 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 
 /** @var $model \common\models\User*/
 
 $this->title = 'User Profile';
 ?>
 <div class="card">
-    <h3 class="card-header">
-        Profile
-    </h3>
+    <h3 class="card-header">Profile</h3>
+    <?php $form = ActiveForm::begin(['id' => 'profile-form']); ?>
     <div class="card-body">
-        <?php $form = ActiveForm::begin(['id' => 'profile-form']); ?>
         <div class="row">
             <div class="col-sm-6 col-12">
                 <?= $form->field($model,'first_name')->textInput()?>
             </div>
             <div class="col-sm-6 col-12">
-                <?= $form->field($model,'first_name')->textInput()?>
+                <?= $form->field($model,'last_name')->textInput()?>
             </div>
         </div>
         <div class="row">
@@ -61,6 +59,11 @@ $this->title = 'User Profile';
                 ])?>
             </div>
         </div>
-        <?php ActiveForm::end()?>
     </div>
+    <div class="card-footer">
+        <div class="form-group">
+            <?= Html::submitButton('Submit',['class' => 'btn btn-primary'])?>
+        </div>
+    </div>
+    <?php ActiveForm::end()?>
 </div>
