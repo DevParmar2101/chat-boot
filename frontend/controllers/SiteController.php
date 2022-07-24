@@ -7,6 +7,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -259,7 +260,18 @@ class SiteController extends Controller
     }
     public function actionProfile()
     {
-        $user = User::findOne(['id' => Yii::$app->user->identitiy]);
-        return $this->render('profile'.['user' => $user]);
+        $path = User::getPath();
+        if (!is_dir($path)) {
+            FileHelper::createDirectory($path,$mode= 777,$recursive = true);
+        }
+        $profile_image = null;
+        $model = User::findOne(['id' => Yii::$app->user->id]);
+        if ($model->profile_image) {
+            $profile = $model->profile_image;
+        }
+
+        return $this->render('profile',[
+            'model' => $model
+        ]);
     }
 }
