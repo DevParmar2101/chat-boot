@@ -259,6 +259,11 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    /**
+     * @return string|\yii\web\Response
+     * @throws \yii\base\Exception
+     */
     public function actionProfile()
     {
         $path = User::getPath();
@@ -293,6 +298,17 @@ class SiteController extends Controller
         }
         return $this->render('profile',[
             'model' => $model
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionTest()
+    {
+        $user = User::findOne(['id' => Yii::$app->user->identity->id]);
+        return $this->render('dev',[
+            'user' => $user
         ]);
     }
 }
