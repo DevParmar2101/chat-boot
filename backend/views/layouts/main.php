@@ -38,13 +38,19 @@ AppAsset::register($this);
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 </ul>
                     <ul class="navbar-nav my-2 my-lg-0">
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="<?= Url::toRoute('/site/index')?>">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <?= Html::a(Yii::$app->user->identity->username.' Logout', Url::to(['site/logout']),['data-method' => 'POST','class' => 'nav-link text-white btn btn-outline-secondary'])?>
+                            </li>
+                        </ul>
                         <div class="dropdown">
-                            <a class="nav-link dropdown-toggle profile-header-dropdown" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?= Yii::$app->user->identity->username?>
-                            </a>
+
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="<?= Url::toRoute('site/profile')?>">Profile</a>
-                                <?= Html::a('Logout', Url::to(['site/logout']),['data-method' => 'POST','class' => 'dropdown-item'])?>
+
                             </div>
                         </div>
                     </ul>

@@ -5,7 +5,7 @@ $params = array_merge(
     require __DIR__ . '/params.php',
     require __DIR__ . '/params-local.php'
 );
-$baseUrl = str_replace('backend/web','/admin',(new \yii\web\Request())->getBaseUrl());
+$baseUrl = str_replace('backend/web','admin',(new \yii\web\Request())->getBaseUrl());
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
