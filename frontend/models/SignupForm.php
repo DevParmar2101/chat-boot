@@ -59,17 +59,19 @@ class SignupForm extends Model
     {
 
         if (!$this->validate()) {
-
-
             $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
+            $user->first_name = $this->first_name;
+            $user->last_name = $this->last_name;
+            $user->gender = $this->gender;
+            $user->age = $this->age;
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
-
-            $user->save();
             return $this->sendEmail($user);
+        }else{
+            return false;
         }
     }
 
