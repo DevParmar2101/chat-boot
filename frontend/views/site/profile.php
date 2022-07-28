@@ -65,9 +65,7 @@ $this->title = 'User Profile';
         </div>
     </div>
     <div class="card-footer">
-        <div class="form-group">
             <?= Html::submitButton('Submit',['class' => 'btn btn-primary'])?>
-        </div>
     </div>
     <?php ActiveForm::end()?>
 </div>

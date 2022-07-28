@@ -7,12 +7,16 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'SignUp';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="card">
-    <div class="card-header"><?= Html::encode($this->title)?></div>
+    <div class="card-header">
+        <h3>
+            <?= Html::encode($this->title)?>
+        </h3>
+    </div>
     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
     <div class="card-body">
         <div class="row">

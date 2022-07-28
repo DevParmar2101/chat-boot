@@ -11,7 +11,11 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="card">
-    <div class="card-header"><?= Html::encode($this->title)?></div>
+    <div class="card-header">
+        <h1>
+            <?= Html::encode($this->title)?>
+        </h1>
+    </div>
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
     <div class="card-body">
         <div class="row">
@@ -32,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="card-footer">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+        <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
