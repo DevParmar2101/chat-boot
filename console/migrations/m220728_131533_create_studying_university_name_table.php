@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%studying_university_name}}`.
  */
-class m220728_131533_create_studing_univercity_name_table extends Migration
+class m220728_131533_create_studying_university_name_table extends Migration
 {
     /**
      * {@inheritdoc}
