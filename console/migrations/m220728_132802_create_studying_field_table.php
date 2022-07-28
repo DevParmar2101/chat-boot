@@ -12,10 +12,13 @@ class m220728_132802_create_studying_field_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{{%studying_branch_name}}', [
+        $this->createTable('{{%studying_field_name}}', [
             'id' => $this->primaryKey(),
             'university_id' => $this->integer(11),
-            ''
+            'field_name' => $this->string(255),
+            'user_id' => $this->integer(11),
+            'status'  => $this->tinyInteger(2),
+            'created_at' => $this->timestamp(),
         ]);
     }
 
