@@ -81,7 +81,6 @@ AppAsset::register($this);
         </div>
 
     </nav>
-
 </header>
 
 <main role="main" class="flex-shrink-0">
