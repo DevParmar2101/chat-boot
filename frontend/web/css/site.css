@@ -88,17 +88,3 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-.profile-header-dropdown{
-    color: white !important;
-    background-color: #575656;
-    border-radius: 5px;
-    border: white 1px solid;
-}
-
-.profile-image {
-    width: 100%;
-}
-
-.profile-border{
-    border-right: 1px grey solid;
-}
