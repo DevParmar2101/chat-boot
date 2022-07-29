@@ -1,7 +1,6 @@
 <?php
 
-use yii\bootstrap4\BootstrapAsset;
-use yii\bootstrap4\BootstrapPluginAsset;
+use yii\web\Request;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -10,7 +9,7 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
-$baseurl = str_replace('/frontend/web','',(new \yii\web\Request())->getBaseUrl());
+$baseurl = str_replace('/frontend/web','',(new Request())->getBaseUrl());
 return [
     'name' => 'Chat Boot',
     'id' => 'app-frontend',
