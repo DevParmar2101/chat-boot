@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * StudyingBranchNameController implements the CRUD actions for StudyingBranchName model.
  */
-class StudyingBranchNameController extends Controller
+class StudyingBranchNameController extends BaseController
 {
     /**
      * @inheritDoc

@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * StudyingFieldNameController implements the CRUD actions for StudyingFieldName model.
  */
-class StudyingFieldNameController extends Controller
+class StudyingFieldNameController extends BaseController
 {
     /**
      * @inheritDoc

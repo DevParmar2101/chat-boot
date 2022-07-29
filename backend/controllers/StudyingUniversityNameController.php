@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * StudyingUniversityNameController implements the CRUD actions for StudyingUniversityName model.
  */
-class StudyingUniversityNameController extends Controller
+class StudyingUniversityNameController extends BaseController
 {
     /**
      * @inheritDoc

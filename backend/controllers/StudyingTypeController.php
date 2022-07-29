@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\StudyingType;
 use common\models\StudyingTypeSearch;
+use Faker\Provider\Base;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -11,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * StudyingTypeController implements the CRUD actions for StudyingType model.
  */
-class StudyingTypeController extends Controller
+class StudyingTypeController extends BaseController
 {
     /**
      * @inheritDoc
@@ -70,7 +71,9 @@ class StudyingTypeController extends Controller
         $model = new StudyingType();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->user_id = \Yii::$app->user->identity->id;
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\StudyingType */
 
-$this->title = $model->id;
+$this->title = $model->studying_type_name;
 $this->params['breadcrumbs'][] = ['label' => 'Studying Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'studying_type_name',
             'user_id',
             'status',

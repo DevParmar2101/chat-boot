@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * UserCurrentEducationController implements the CRUD actions for UserCurrentEducation model.
  */
-class UserCurrentEducationController extends Controller
+class UserCurrentEducationController extends BaseController
 {
     /**
      * @inheritDoc
