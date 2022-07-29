@@ -50,4 +50,5 @@ class BaseActiveRecord extends ActiveRecord
         ];
         return $array;
     }
+
 }

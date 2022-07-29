@@ -22,7 +22,7 @@ use Yii;
  * @property StudyingUniversityName $university
  * @property User $user
  */
-class UserCurrentEducation extends \yii\db\ActiveRecord
+class UserCurrentEducation extends BaseActiveRecord
 {
     /**
      * {@inheritdoc}

@@ -17,7 +17,7 @@ use Yii;
  * @property User $user
  * @property UserCurrentEducation[] $userCurrentEducations
  */
-class StudyingType extends \yii\db\ActiveRecord
+class StudyingType extends BaseActiveRecord
 {
     /**
      * {@inheritdoc}
