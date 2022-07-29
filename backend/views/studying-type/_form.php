@@ -2,31 +2,27 @@
 
 use kartik\select2\Select2;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\StudyingType */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap4\ActiveForm */
 ?>
-
-<div class="studying-type-form">
-
+<div class="card">
+    <h5 class="card-header">Studying Type</h5>
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'studying_type_name')->textInput() ?>
-
-    <?= $form->field($model, 'status')->widget(Select2::class,[
-        'data' => $model->status(),
-        'options' => [
-            'placeholder' => 'Select Status',
-            'autoClear' => true
-        ]
-    ]) ?>
-
-    <div class="form-group">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                <?= $form->field($model,'studying_type_name')->textInput()?>
+            </div>
+            <div class="col-sm-6 col-12">
+                <?= $form->field($model,'status')->dropdownList($model->status())?>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>
