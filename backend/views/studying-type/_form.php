@@ -2,7 +2,7 @@
 
 use kartik\select2\Select2;
 use yii\helpers\Html;
-use yii\bootstrap4\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\StudyingType */
@@ -13,15 +13,15 @@ use yii\bootstrap4\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'studying_type_name')->widget(Select2::class,[
-            'data' => $model->status(),
-            'options' => [
-                    'placeholder' => 'Select Status',
-                    'autoClear' => true
-            ]
-    ]) ?>
+    <?= $form->field($model, 'studying_type_name')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->widget(Select2::class,[
+        'data' => $model->status(),
+        'options' => [
+            'placeholder' => 'Select Status',
+            'autoClear' => true
+        ]
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

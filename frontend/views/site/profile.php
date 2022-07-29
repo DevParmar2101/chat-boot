@@ -3,9 +3,9 @@
 use kartik\file\FileInput;
 use kartik\select2\Select2;
 use yii\helpers\Html;
-use yii\bootstrap4\ActiveForm;
+use yii\widgets\ActiveForm;
 
-/** @var $model \common\models\User*/
+/* @var $model \common\models\User*/
 
 $this->title = 'User Profile';
 ?>
