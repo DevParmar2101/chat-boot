@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="studying-type-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -24,15 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Back',['index'],['class'=>'btn btn-warning'])?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'studying_type_name',
-            'user_id',
-            'status',
-            'created_at',
+            [
+                    'attribute' => 'status',
+                    'value' => function ($model){
+                        return $model->status()[$model->status];
+                    }
+            ],
+            'created_at:datetime',
         ],
     ]) ?>
 
