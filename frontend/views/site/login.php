@@ -12,19 +12,23 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="card">
     <div class="card-header">
-        <h1>
+        <h3>
             <?= Html::encode($this->title)?>
-        </h1>
+        </h3>
     </div>
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
+            </div>
+            <div class="col-lg-6">
                 <?= $form->field($model, 'password')->passwordInput() ?>
-
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div style="color:#999;margin:1em 0">
