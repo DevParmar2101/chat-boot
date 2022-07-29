@@ -12,6 +12,7 @@ use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
 
 AppAsset::register($this);
+$action_id = Yii::$app->controller->id;
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -58,15 +59,27 @@ AppAsset::register($this);
     </header>
 
     <main role="main" class="flex-shrink-0">
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= Alert::widget() ?>
-            <?= $content ?>
+        <div class="mt-5 pr-5 pl-5 container-fluid">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <div id="list-example" class="list-group">
+                        <a class="list-group-item list-group-item-action <?= $action_id == 'user-current-education'?'active':''?>" href="<?= Url::toRoute('/user-current-education')?>">User Current Education</a>
+                        <a class="list-group-item list-group-item-action <?= $action_id == 'studying-type'?'active':''?>" href="<?= Url::toRoute('/studying-type')?>">Studying Type</a>
+                        <a class="list-group-item list-group-item-action <?= $action_id == 'studying-university-name'?'active':''?>" href="<?= Url::toRoute('/studying-university-name')?>">Studying University</a>
+                        <a class="list-group-item list-group-item-action <?= $action_id == 'studying-field-name'?'active':''?>" href="<?= Url::toRoute('/studying-field-name')?>">Studying Field</a>
+                        <a class="list-group-item list-group-item-action <?= $action_id == 'studying-branch-name'?'active':''?>" href="<?= Url::toRoute('/studying-branch-name')?>">Studying Branch</a>
+                    </div>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
+                        <?= Breadcrumbs::widget([
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        ]) ?>
+                        <?= Alert::widget() ?>
+                        <?= $content ?>
+                </div>
+            </div>
         </div>
     </main>
-
     <footer class="footer mt-auto py-3 text-muted">
         <div class="container">
             <p class="float-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
