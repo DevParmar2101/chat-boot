@@ -258,7 +258,7 @@ class User extends BaseActiveRecord implements IdentityInterface
 
     public static function gender()
     {
-        $array = [
+         $array = [
             self::MALE => self::MALE_GENDER,
             self::FEMALE => self::FEMALE_GENDER,
             self::OTHERS => self::OTHERS_GENDER,
