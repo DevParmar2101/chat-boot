@@ -7,25 +7,25 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\StudyingUniversityName */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
-<div class="studying-university-name-form">
-
+<div class="card">
+    <h5 class="card-header">Studying University</h5>
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'type_id')->textInput() ?>
-
-    <?= $form->field($model, 'university_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <div class="form-group">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                <?= $form->field($model, 'university_name')->textInput() ?>
+            </div>
+            <div class="col-sm-6 col-12">
+                <?= $form->field($model,'type_id')->dropDownList($model->status())?>
+            </div>
+            <div class="col-sm-6 col-12">
+                <?= $form->field($model, 'status')->dropDownList($model->status())?>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>
+

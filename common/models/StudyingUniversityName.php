@@ -50,7 +50,7 @@ class StudyingUniversityName extends BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'type_id' => 'Type ID',
+            'type_id' => 'Studying Type',
             'university_name' => 'University Name',
             'status' => 'Status',
             'user_id' => 'User ID',
