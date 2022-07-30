@@ -16,10 +16,10 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'university_name')->textInput() ?>
             </div>
             <div class="col-sm-6 col-12">
-                <?= $form->field($model,'type_id')->dropDownList($model->status())?>
+                <?= $form->field($model,'type_id')->dropDownList($model->getStudyType(),['prompt' => 'Select studying Type'])?>
             </div>
             <div class="col-sm-6 col-12">
-                <?= $form->field($model, 'status')->dropDownList($model->status())?>
+                <?= $form->field($model, 'status')->dropDownList($model->status(),['prompt' => 'Select Status'])?>
             </div>
         </div>
     </div>

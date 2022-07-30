@@ -17,7 +17,7 @@ use yii\bootstrap4\ActiveForm;
                 <?= $form->field($model,'studying_type_name')->textInput()?>
             </div>
             <div class="col-sm-6 col-12">
-                <?= $form->field($model,'status')->dropdownList($model->status())?>
+                <?= $form->field($model,'status')->dropdownList($model->status(),['prompt' => 'Select Status'])?>
             </div>
         </div>
     </div>
