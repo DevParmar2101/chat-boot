@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use Faker\Provider\Base;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "studying_university_name".
@@ -96,5 +98,11 @@ class StudyingUniversityName extends BaseActiveRecord
     public function getUserCurrentEducations()
     {
         return $this->hasMany(UserCurrentEducation::className(), ['university_id' => 'id']);
+    }
+
+    public function getStudyType()
+    {
+        $model = ArrayHelper::map(StudyingType::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','studying_type_name');
+        return $model;
     }
 }
