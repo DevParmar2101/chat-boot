@@ -26,13 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'field_name',
             [
                     'attribute' => 'university_id',
                     'value'  => function($model) {
                         return $model->getUniversityName()[$model->university_id];
                     }
             ],
-            'field_name',
             [
                     'attribute' => 'status',
                     'value' => function($model){

@@ -39,7 +39,7 @@ YiiAsset::register($this);
             [
                     'attribute' => 'user_id',
                     'value' => function ($model){
-                        $user = User::findOne(['id' => $model->id]);
+                        $user = User::findOne(['id' => $model->user_id]);
                         return $user->getFullName();
                     }
             ],
