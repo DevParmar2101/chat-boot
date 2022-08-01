@@ -1,5 +1,6 @@
 <?php
 
+use common\models\StudyingUniversityName;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -14,8 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="studying-university-name-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a(Yii::t('app', 'Create Studying University Name'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -28,12 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'type_id',
             'university_name',
-            'status',
-            'user_id',
-            //'created_at',
+            [
+                    'attribute' => 'type_id',
+                    'value' => function($model) {
+                        return $model->getStudyType()[$model->type_id];
+                    }
+            ],
+            [
+                    'attribute' => 'status',
+                    'value' => function($model){
+                        return $model->status()[$model->status];
+                    }
+            ],
+            'created_at:datetime',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, StudyingUniversityName $model, $key, $index, $column) {
