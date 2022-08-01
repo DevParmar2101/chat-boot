@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use phpDocumentor\Reflection\Types\Array_;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "studying_field_name".
@@ -50,9 +52,9 @@ class StudyingFieldName extends BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'university_id' => 'University ID',
+            'university_id' => 'University Name',
             'field_name' => 'Field Name',
-            'user_id' => 'User ID',
+            'user_id' => 'User Name',
             'status' => 'Status',
             'created_at' => 'Created At',
         ];
@@ -96,5 +98,13 @@ class StudyingFieldName extends BaseActiveRecord
     public function getUserCurrentEducations()
     {
         return $this->hasMany(UserCurrentEducation::className(), ['studying_field_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getUniversityName()
+    {
+        return ArrayHelper::map(StudyingUniversityName::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','university_name');
     }
 }
