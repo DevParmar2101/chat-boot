@@ -14,9 +14,6 @@ $this->title = Yii::t('app', 'Studying Field Names');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="studying-field-name-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a(Yii::t('app', 'Create Studying Field Name'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -29,10 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'university_id',
+            [
+                    'attribute' => 'university_id',
+                    'value'  => function($model) {
+                        return $model->getUniversityName()[$model->university_id];
+                    }
+            ],
             'field_name',
-            'status',
-            //'created_at',
+            [
+                    'attribute' => 'status',
+                    'value' => function($model){
+                        return $model->status()[$model->status];
+                    }
+            ],
+            'created_at:datetime',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, StudyingFieldName $model, $key, $index, $column) {
