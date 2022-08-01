@@ -100,9 +100,11 @@ class StudyingUniversityName extends BaseActiveRecord
         return $this->hasMany(UserCurrentEducation::className(), ['university_id' => 'id']);
     }
 
+    /**
+     * @return array
+     */
     public function getStudyType()
     {
-        $model = ArrayHelper::map(StudyingType::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','studying_type_name');
-        return $model;
+        return ArrayHelper::map(StudyingType::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','studying_type_name');
     }
 }
