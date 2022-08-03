@@ -12,7 +12,10 @@ class m220803_130022_add_data_in_studying_branch_table extends Migration
      */
     public function safeUp()
     {
+        $query =<<<EOF
 
+EOF;
+        $this->execute($query);
     }
 
     /**

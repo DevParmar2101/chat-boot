@@ -12,7 +12,10 @@ class m220803_125940_add_data_in_studying_type_table extends Migration
      */
     public function safeUp()
     {
+        $query =<<<EOF
 
+EOF;
+        $this->execute($query);
     }
 
     /**

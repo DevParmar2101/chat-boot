@@ -12,7 +12,10 @@ class m220803_125957_add_data_in_studying_university_table extends Migration
      */
     public function safeUp()
     {
+        $query =<<<EOF
 
+EOF;
+        $this->execute($query);
     }
 
     /**
