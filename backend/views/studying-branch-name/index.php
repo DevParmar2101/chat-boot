@@ -27,11 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'field_id',
             'branch_name',
-            'user_id',
-            'status',
+            [
+                    'attribute' => 'field_id',
+                    'value' => function($model){
+                        return $model->getStudyFieldName()[$model->field_id];
+                    }
+            ],
+
+            [
+                    'attribute' => 'status',
+                    'value' => function($model) {
+                        return $model->status()[$model->status];
+                    }
+            ],
             //'created_at',
             [
                 'class' => ActionColumn::className(),

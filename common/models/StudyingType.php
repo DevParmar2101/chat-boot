@@ -34,7 +34,7 @@ class StudyingType extends BaseActiveRecord
     {
         return [
             [['user_id', 'status'], 'integer'],
-            [['studying_type_name'],'required'],
+            [['studying_type_name', 'user_id', 'status'],'required'],
             [['created_at'], 'safe'],
             [['studying_type_name'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],

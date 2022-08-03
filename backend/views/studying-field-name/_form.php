@@ -1,11 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\StudyingFieldName */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap4\ActiveForm */
 ?>
 
 <div class="card">
@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="row">
             <div class="col-sm-6 col-12">
-                <?= $form->field($model, 'status')->dropDownList($model->status()) ?>
+                <?= $form->field($model, 'status')->dropDownList($model->status(),['prompt' => 'Select Status']) ?>
             </div>
         </div>
     </div>
