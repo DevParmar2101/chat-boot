@@ -49,7 +49,7 @@ class StudyingBranchName extends BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'field_id' => 'Field ID',
+            'field_id' => 'Field Name',
             'branch_name' => 'Branch Name',
             'user_id' => 'User ID',
             'status' => 'Status',

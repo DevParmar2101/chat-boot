@@ -1,5 +1,6 @@
 <?php
 
+use common\models\StudyingBranchName;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -13,8 +14,6 @@ $this->title = Yii::t('app', 'Studying Branch Names');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="studying-branch-name-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Studying Branch Name'), ['create'], ['class' => 'btn btn-success']) ?>

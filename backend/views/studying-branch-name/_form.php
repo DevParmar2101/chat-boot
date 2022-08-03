@@ -8,24 +8,27 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="studying-branch-name-form">
-
+<div class="card">
+    <h5 class="card-header">Studying Branch Name</h5>
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'field_id')->textInput() ?>
-
-    <?= $form->field($model, 'branch_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <div class="form-group">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'branch_name')->textInput()?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'field_id')->textInput() ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'status')->textInput() ?>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>
+
