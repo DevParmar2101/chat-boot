@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "studying_branch_name".
@@ -86,4 +87,10 @@ class StudyingBranchName extends BaseActiveRecord
     {
         return $this->hasMany(UserCurrentEducation::className(), ['studying_branch_id' => 'id']);
     }
+
+    public function getStudyFieldName()
+    {
+        return ArrayHelper::map(StudyingFieldName::find()->where(['status'=> BaseActiveRecord::STATUS_ACTIVE])->all(),'id','field_name');
+    }
+
 }

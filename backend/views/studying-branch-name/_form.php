@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'branch_name')->textInput()?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'field_id')->textInput() ?>
+                <?= $form->field($model, 'field_id')->dropDownList($model->getStudyFieldName(),['prompt' => 'Select Field Name']) ?>
             </div>
         </div>
         <div class="row">
