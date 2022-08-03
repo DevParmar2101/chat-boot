@@ -36,6 +36,7 @@ class StudyingBranchName extends BaseActiveRecord
     {
         return [
             [['field_id', 'user_id', 'status'], 'integer'],
+            [['field_id', 'branch_name','user_id', 'status'], 'required'],
             [['created_at'], 'safe'],
             [['branch_name'], 'string', 'max' => 255],
             [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingFieldName::className(), 'targetAttribute' => ['field_id' => 'id']],
