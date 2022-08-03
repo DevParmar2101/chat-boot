@@ -38,6 +38,7 @@ class StudyingUniversityName extends BaseActiveRecord
     {
         return [
             [['type_id', 'status', 'user_id'], 'integer'],
+            [['type_id', 'university_name','status', 'user_id'], 'required'],
             [['created_at'], 'safe'],
             [['university_name'], 'string', 'max' => 255],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingType::className(), 'targetAttribute' => ['type_id' => 'id']],
