@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($model, 'status')->textInput() ?>
+                <?= $form->field($model, 'status')->dropDownList($model->status()) ?>
             </div>
         </div>
     </div>
