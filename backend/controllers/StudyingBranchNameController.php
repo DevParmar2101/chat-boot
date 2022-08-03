@@ -70,7 +70,9 @@ class StudyingBranchNameController extends BaseController
         $model = new StudyingBranchName();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->user_id = \Yii::$app->user->identity->id;
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
