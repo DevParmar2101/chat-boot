@@ -10,3 +10,6 @@
 .profile-border{
     border-right: 1px grey solid;
 }
+.help-block {
+    color: #bd0d0d !important;
+}
