@@ -27,7 +27,6 @@ class m220801_125838_add_rbac_role_in_tables extends Migration
             array(
                 array('admin', 'admin', 'name', 1, NULL, '22', 'O-oDBLVlj7obhJzovnP15-Soz9iUB', '', '$2y$13$.aRQImtxqZur2mQb0jivKugRBwZnvfu1GP2v1fNbC7P/EjArPLnl.', NULL, 'admin@gmail.com', '10', $time, $time),
                 array('user', 'user', 'name', 1, NULL, '22', 'O-oDBLVlj7obhJzovnP15-Soz', '', '$2y$13$.aRQImtxqZur2mQb0jivKugRBwZnvfu1GP2v1fNbC7P/EjArPLnl.', NULL, 'user@gmail.com', '10', $time, $time),
-
             )
         );
 
