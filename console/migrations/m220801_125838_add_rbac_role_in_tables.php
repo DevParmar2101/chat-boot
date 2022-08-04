@@ -23,10 +23,10 @@ class m220801_125838_add_rbac_role_in_tables extends Migration
         $time = time();
         $this->batchInsert(
             'user',
-            ['username', 'first_name', 'last_name', 'mobile_number', 'profile_pic', 'promo_code', 'auth_key', 'verification_token', 'password_hash', 'password_reset_token', 'email', 'status', 'created_at', 'updated_at'],
+            ['username', 'first_name', 'last_name', 'gender', 'profile_image', 'age', 'auth_key', 'verification_token', 'password_hash', 'password_reset_token', 'email', 'status', 'created_at', 'updated_at'],
             array(
-                array('admin', 'admin', 'name', NULL, NULL, 'admin_master123', 'O-oDBLVlj7obhJzovnP15-Soz9iUB', '', '$2y$13$.aRQImtxqZur2mQb0jivKugRBwZnvfu1GP2v1fNbC7P/EjArPLnl.', NULL, 'admin@gmail.com', '10', $time, $time),
-                array('user', 'user', 'name', NULL, NULL, 'user_master123', 'O-oDBLVlj7obhJzovnP15-Soz', '', '$2y$13$.aRQImtxqZur2mQb0jivKugRBwZnvfu1GP2v1fNbC7P/EjArPLnl.', NULL, 'user@gmail.com', '10', $time, $time),
+                array('admin', 'admin', 'name', 1, NULL, '22', 'O-oDBLVlj7obhJzovnP15-Soz9iUB', '', '$2y$13$.aRQImtxqZur2mQb0jivKugRBwZnvfu1GP2v1fNbC7P/EjArPLnl.', NULL, 'admin@gmail.com', '10', $time, $time),
+                array('user', 'user', 'name', 1, NULL, '22', 'O-oDBLVlj7obhJzovnP15-Soz', '', '$2y$13$.aRQImtxqZur2mQb0jivKugRBwZnvfu1GP2v1fNbC7P/EjArPLnl.', NULL, 'user@gmail.com', '10', $time, $time),
 
             )
         );
