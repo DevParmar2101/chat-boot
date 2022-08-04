@@ -13,3 +13,21 @@
 .help-block {
     color: #bd0d0d !important;
 }
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+a[title] {
+    color: #6c757d;
+}
+a[title]:hover {
+    color: #393c3f;
+}
+.breadcrumb-item a{
+    color: #393c3f;
+}
+a[data-sort] {
+    color: #393c3f;
+}
