@@ -1,7 +1,7 @@
 <?php
 
 use common\models\UserCurrentEducation;
-use yii\bootstrap4\ActiveForm;
+use common\components\ActiveForm;
 use yii\helpers\Html;
 use yii\web\View;
 

@@ -95,7 +95,7 @@ class SiteController extends Controller
         $user_education = new UserCurrentEducation();
         $user_education->scenario = $user_education::STEP_ONE;
 
-        $card_title = 'Your Current Education<';
+        $card_title = 'Your Current Education';
         $form_information = 'Please give same detail as in your college.';
 
         $content = [
