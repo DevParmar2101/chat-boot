@@ -114,8 +114,40 @@ class SiteController extends Controller
         }
     }
 
+    /**
+     * @param $renderAjax
+     * @return string|void|null
+     */
     public function actionStepTwo($renderAjax = false){
-        return $this->render('step-two');
+        Yii::$app->view->title = 'Form Step Two';
+        $user_id = Yii::$app->user->identity->id;
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        $content = [
+            'view_name' => 'step-two',
+            'user' => null,
+            'user_education' => $user_education
+        ];
+        if ($renderAjax) {
+            return  $this->renderAjax($this->educationView,$content);
+        }
+        if (Yii::$app->request->isPost){
+            if ($user_education->load(Yii::$app->request->post())) {
+                if ($user_education->save()){
+                    return $this->actionStepThree(true);
+                }
+            }
+        }else{
+            return $this->render($this->educationView,$content);
+        }
+    }
+
+    /***
+     * @param $renderAjax
+     * @return string|void|null
+     */
+    public function actionStepThree($renderAjax)
+    {
+
     }
     /**
      * Logs in a user.
