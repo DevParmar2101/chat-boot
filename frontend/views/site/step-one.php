@@ -10,12 +10,13 @@ use yii\web\View;
 
 ?>
 
-<div class="card">
+<div class="card text-center mx-auto" style="display:block; width: 45rem">
     <div class="card-header">
         <h4>Your Current Education</h4>
         <span class="text-sm-left text-secondary">Step 1/4</span>
     </div>
     <div class="card-body">
-
+        <p>Please give your University Details Here</p>
+        <?php?>
     </div>
 </div>
