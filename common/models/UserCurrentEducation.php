@@ -15,6 +15,9 @@ use Yii;
  * @property string|null $last_year_percentage
  * @property int|null $user_id
  * @property string $created_at
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $mobile_number
  *
  * @property StudyingType $educationType
  * @property StudyingBranchName $studyingBranch
