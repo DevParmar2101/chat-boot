@@ -18,10 +18,22 @@ use yii\web\View;
         <p><?= $form_information?></p>
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($user_education,'education_type_id')->textInput()?>
+                <?= $form->field($user_education,'education_type_id')->widget(\kartik\select2\Select2::class,[
+                        'data' => $user_education->getEducationTypeName(),
+                        'options' => [
+                                'placeholder' => 'Select Education Type',
+                                'allowClear' => true,
+                        ]
+                ])?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($user_education,'university_id')->textInput()?>
+                <?= $form->field($user_education,'university_id')->widget(\kartik\select2\Select2::class,[
+                        'data' => $user_education->getEducationTypeName(),
+                        'options' => [
+                                'placeholder' => 'Select University Name',
+                                'allowClear' => true,
+                        ]
+                ])?>
             </div>
         </div>
     </div>

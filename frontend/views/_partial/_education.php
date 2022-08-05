@@ -10,6 +10,7 @@ use johnitvn\ajaxcrud\CrudAsset;
  * @var $user_education UserCurrentEducation
  * @var $form_information string
  * @var $card_title string
+ * @var $step string
  */
 CrudAsset::register($this);
 ?>
@@ -19,7 +20,7 @@ CrudAsset::register($this);
         <div class="card-header">
             <h4><?= $card_title?:'Card Title'?></h4>
             <hr>
-            <span class="text-sm-left text-secondary">Step 1/4</span>
+            <span class="text-sm-left text-secondary">Step <?= $step?>/4</span>
         </div>
         <div class="card">
             <?= $this->render('@app/views/site/'.$view_name,[

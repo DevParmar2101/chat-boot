@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user_current_education".
@@ -120,5 +121,10 @@ class UserCurrentEducation extends BaseActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getEducationTypeName()
+    {
+        return ArrayHelper::map(StudyingType::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','studying_type_name');
     }
 }

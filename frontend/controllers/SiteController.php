@@ -97,6 +97,7 @@ class SiteController extends Controller
 
         $card_title = 'Your Current Education';
         $form_information = 'Please give same detail as in your college.';
+        $step = 1;
 
         $content = [
             'view_name' => 'step-one',
@@ -104,6 +105,7 @@ class SiteController extends Controller
             'user_education' => $user_education,
             'card_title' => $card_title,
             'form_information' => $form_information,
+            'step' => $step,
         ];
         if ($renderAjax){
             return $this->renderAjax($this->educationView, $content);
@@ -128,10 +130,18 @@ class SiteController extends Controller
         Yii::$app->view->title = 'Form Step Two';
         $user_id = Yii::$app->user->identity->id;
         $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+
+        $card_title = 'Education Type & University Name';
+        $form_information = 'Please give same detail as in your college.';
+        $step = 2;
+
         $content = [
             'view_name' => 'step-two',
             'user' => null,
-            'user_education' => $user_education
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
+            'step' => $step,
         ];
         if ($renderAjax) {
             return  $this->renderAjax($this->educationView,$content);
