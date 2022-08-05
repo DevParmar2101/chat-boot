@@ -3,6 +3,7 @@
 use common\models\UserCurrentEducation;
 use common\components\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\View;
 
 /** @var $this View*/
@@ -32,3 +33,11 @@ use yii\web\View;
     <?= Html::submitButton('Save & Next',['class' => 'btn btn-primary'])?>
 </div>
 <?php ActiveForm::end()?>
+
+<?php
+$current_page_url = Url::toRoute(['site/step-one']);
+$js_page_reload = <<<JS
+window.history.pushState('', '', "$current_page_url");
+JS;
+$this->registerJs($js_page_reload);
+?>
