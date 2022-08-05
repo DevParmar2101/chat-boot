@@ -27,6 +27,7 @@ use Yii;
  */
 class UserCurrentEducation extends BaseActiveRecord
 {
+    const STEP_ONE = 1;
     /**
      * {@inheritdoc}
      */
@@ -42,6 +43,7 @@ class UserCurrentEducation extends BaseActiveRecord
     {
         return [
             [['education_type_id', 'university_id', 'studying_field_id', 'studying_branch_id', 'user_id','first_name','last_name','mobile_number'], 'integer'],
+            [['first_name','last_name','mobile_number'],'required','on' => self::STEP_ONE],
             [['created_at'], 'safe'],
             [['last_year_percentage'], 'string', 'max' => 11],
             [['education_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingType::className(), 'targetAttribute' => ['education_type_id' => 'id']],
