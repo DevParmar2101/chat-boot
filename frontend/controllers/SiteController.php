@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\User;
+use common\models\UserCurrentEducation;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -81,6 +82,15 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+
+    public function actionStepOne()
+    {
+        $model = new UserCurrentEducation();
+        return $this->render('step-one',[
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Logs in a user.
      *
@@ -88,22 +98,26 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        $is_guest = Yii::$app->user->isGuest;
+        if (!$is_guest){
+            $user_current_education = UserCurrentEducation::findOne(['user' => Yii::$app->user->identity->id]);
+        }
+        if (!$is_guest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if ($user_current_education){
+                return $this->goBack();
+            }else{
+              return $this->redirect(['step-one']);
+            }
         }
-
         $model->password = '';
-
         return $this->render('login', [
             'model' => $model,
         ]);
     }
-
     /**
      * Logs out the current user.
      *
