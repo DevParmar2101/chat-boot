@@ -1,5 +1,7 @@
 <?php
 
+use yii\bootstrap\BootstrapAsset;
+use yii\bootstrap\BootstrapPluginAsset;
 use yii\web\Request;
 
 $params = array_merge(
@@ -43,6 +45,17 @@ return [
             'errorAction' => 'site/error',
         ],
 
+        'assetManager' => [
+            'forceCopy' => true,
+            'bundles' => [
+                BootstrapPluginAsset::class => [
+                    'js' => []
+                ],
+                BootstrapAsset::class => [
+                    'css' => [],
+                ],
+            ],
+        ],
 
         'urlManager' => [
             'baseUrl' => $baseurl,
