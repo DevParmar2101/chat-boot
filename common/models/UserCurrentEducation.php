@@ -62,12 +62,12 @@ class UserCurrentEducation extends BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'education_type_id' => 'Education Type ID',
-            'university_id' => 'University ID',
-            'studying_field_id' => 'Studying Field ID',
-            'studying_branch_id' => 'Studying Branch ID',
+            'education_type_id' => 'Education Type',
+            'university_id' => 'University Name',
+            'studying_field_id' => 'Field Name',
+            'studying_branch_id' => 'Branch Name',
             'last_year_percentage' => 'Last Year Percentage',
-            'user_id' => 'User ID',
+            'user_id' => 'User Name',
             'created_at' => 'Created At',
         ];
     }
