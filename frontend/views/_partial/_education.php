@@ -13,9 +13,10 @@ CrudAsset::register($this);
 ?>
 
 <?php Pjax::begin(['id' => 'id-setup-process','enablePushState' => false,'scrollTo' => false]); ?>
-    <div class="card text-center mx-auto" style="display:block; width: 45rem">
+    <div class="card mx-auto" style="display:block; width: 45rem">
         <div class="card-header">
             <h4>Your Current Education</h4>
+            <hr>
             <span class="text-sm-left text-secondary">Step 1/4</span>
         </div>
         <div class="card">
