@@ -28,11 +28,12 @@ use yii\web\View;
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($model,'mobile_number')->textInput(
-
-                )?>
+                <?= $form->field($model,'mobile_number')->textInput()?>
             </div>
         </div>
+    </div>
+    <div class="card-footer">
+        <?= \yii\helpers\Html::submitButton('Save & Next',['class' => 'btn btn-primary'])?>
     </div>
     <?php ActiveForm::end()?>
 </div>
