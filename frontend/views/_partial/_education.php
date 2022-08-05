@@ -8,6 +8,8 @@ use johnitvn\ajaxcrud\CrudAsset;
  * @var $view_name string
  * @var $user User
  * @var $user_education UserCurrentEducation
+ * @var $form_information string
+ * @var $card_title string
  */
 CrudAsset::register($this);
 ?>
@@ -15,7 +17,7 @@ CrudAsset::register($this);
 <?php Pjax::begin(['id' => 'id-setup-process','enablePushState' => false,'scrollTo' => false]); ?>
     <div class="card mx-auto" style="display:block; width: 45rem">
         <div class="card-header">
-            <h4>Your Current Education</h4>
+            <h4><?= $card_title?:'Card Title'?></h4>
             <hr>
             <span class="text-sm-left text-secondary">Step 1/4</span>
         </div>
@@ -23,6 +25,7 @@ CrudAsset::register($this);
             <?= $this->render('@app/views/site/'.$view_name,[
                 'user' => isset($user) ? $user : null,
                 'user_education'=> isset($user_education) ? $user_education : null,
+                'form_information' => isset($form_information) ? $form_information : null,
             ])?>
 
         </div>
