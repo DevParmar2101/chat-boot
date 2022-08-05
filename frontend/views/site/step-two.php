@@ -18,10 +18,10 @@ use yii\web\View;
         <p><?= $form_information?></p>
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($user_education,'first_name')->textInput()?>
+                <?= $form->field($user_education,'education_type_id')->textInput()?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($user_education,'last_name')->textInput()?>
+                <?= $form->field($user_education,'university_id')->textInput()?>
             </div>
         </div>
     </div>
