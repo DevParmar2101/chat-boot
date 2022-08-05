@@ -94,10 +94,16 @@ class SiteController extends Controller
         $user = User::findOne(['id' => $user_id]);
         $user_education = new UserCurrentEducation();
         $user_education->scenario = $user_education::STEP_ONE;
+
+        $card_title = 'Your Current Education<';
+        $form_information = 'Please give same detail as in your college.';
+
         $content = [
-          'view_name' => 'step-one',
-          'user' =>   $user,
-          'user_education' => $user_education
+            'view_name' => 'step-one',
+            'user' =>   $user,
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
         ];
         if ($renderAjax){
             return $this->renderAjax($this->educationView, $content);
