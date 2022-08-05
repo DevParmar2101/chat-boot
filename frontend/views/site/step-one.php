@@ -15,8 +15,24 @@ use yii\web\View;
         <h4>Your Current Education</h4>
         <span class="text-sm-left text-secondary">Step 1/4</span>
     </div>
+    <?php $form = ActiveForm::begin(['id'=>'step-one-form'])?>
     <div class="card-body">
-        <p>Please give your University Details Here</p>
-        <?php?>
+        <p>Please give same detail as in your college.</p>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model,'first_name')->textInput()?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model,'last_name')->textInput()?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model,'mobile_number')->textInput(
+
+                )?>
+            </div>
+        </div>
     </div>
+    <?php ActiveForm::end()?>
 </div>
