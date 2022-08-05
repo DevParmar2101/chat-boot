@@ -84,11 +84,26 @@ AppAsset::register($this);
 </header>
 
 <main role="main" class="flex-shrink-0">
+    <div id="preloader" style="display: none;">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="preloader-pjax" style="display: none;">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        <div class="content-body content-height">
+
+        </div>
         <?= $content ?>
     </div>
 </main>
@@ -101,6 +116,52 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+<?php
+$js_pjax =<<<JS
+$.pjax.defaults.scrollTo=false;
+$("body").bind("ajaxComplete", function(e, xhr, settings){
+    var handleMinHeight = function() {
+		var win_h = window.outerHeight;
+		if (win_h > 0 ? win_h : screen.height) {
+			$(".content-body").css("min-height", (win_h + 60) + "px");
+		}
+	}
+    handleMinHeight();
+});
+$(document).on('submit', 'form[data-pjax-custom]', function(event) {
+    event.preventDefault();
+    $(this).submit(function () {
+        return false;
+    });
+    var pjaxId = $(this).attr('pjax-id');
+    if(!pjaxId){
+        pjaxId = 'id-setup-process';
+    }
+    $.pjax.submit(event, {
+        "pushRedirect": true,
+        "replaceRedirect": false,
+        "push":false,
+        "replace":false,
+        "timeout":false,
+        "scrollTo":false,
+        "container":'#'+pjaxId
+    });
+});
+$(document).on('pjax:send', function() {
+  $('#preloader-pjax').fadeTo(0, 50, 'fade');
+});
+$(document).on('pjax:complete', function() {
+  $('#preloader-pjax').fadeOut();
+})
+$("body").on("submit", "form", function() {
+    $(this).submit(function() {
+        return false;
+    });
+    return true;
+});
+JS;
+$this->registerJs($js_pjax)
+?>
 </body>
 </html>
 <?php $this->endPage();
