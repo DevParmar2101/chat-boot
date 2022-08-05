@@ -25,6 +25,7 @@ use yii\web\UploadedFile;
  */
 class SiteController extends Controller
 {
+    public $educationView = '@app/views/_partial/_education';
     /**
      * {@inheritdoc}
      */
@@ -82,15 +83,40 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-
-    public function actionStepOne()
+    /**
+     * @param $renderAjax
+     * @return string|void
+     */
+    public function actionStepOne($renderAjax = false)
     {
-        $model = new UserCurrentEducation();
-        return $this->render('step-one',[
-            'model' => $model,
-        ]);
+        Yii::$app->view->title = 'Form Step One';
+        $user_id = Yii::$app->user->identity->id;
+        $user = User::findOne(['id' => $user_id]);
+        $user_education = new UserCurrentEducation();
+        $user_education->scenario = $user_education::STEP_ONE;
+        $content = [
+          'view_name' => 'step-one',
+          'user' =>   $user,
+          'user_education' => $user_education
+        ];
+        if ($renderAjax){
+            return $this->renderAjax($this->educationView, $content);
+        }
+        if (Yii::$app->request->isPost){
+            if ($user_education->load(Yii::$app->request->post())){
+                $user_education->user_id = $user_id;
+                if ($user_education->save()) {
+                    return $this->actionStepTwo(true);
+                }
+            }
+        }else{
+            return $this->render($this->educationView,$content);
+        }
     }
 
+    public function actionStepTwo($renderAjax = false){
+        return $this->render('step-two');
+    }
     /**
      * Logs in a user.
      *
