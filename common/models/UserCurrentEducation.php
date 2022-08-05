@@ -42,7 +42,8 @@ class UserCurrentEducation extends BaseActiveRecord
     public function rules()
     {
         return [
-            [['education_type_id', 'university_id', 'studying_field_id', 'studying_branch_id', 'user_id','first_name','last_name','mobile_number'], 'integer'],
+            [['education_type_id', 'university_id', 'studying_field_id', 'studying_branch_id', 'user_id'], 'integer'],
+            [['first_name','last_name','mobile_number'],'string'],
             [['first_name','last_name','mobile_number'],'required','on' => self::STEP_ONE],
             [['created_at'], 'safe'],
             [['last_year_percentage'], 'string', 'max' => 11],
