@@ -2,8 +2,10 @@
 
 use common\components\ActiveForm;
 use common\models\UserCurrentEducation;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\web\View;
 
 /** @var $this View*/
@@ -18,17 +20,38 @@ use yii\web\View;
         <p><?= $form_information?></p>
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($user_education,'education_type_id')->widget(\kartik\select2\Select2::class,[
-                        'data' => $user_education->getEducationTypeName(),
-                        'options' => [
-                                'placeholder' => 'Select Education Type',
-                                'allowClear' => true,
-                        ]
+                <?php
+                $format = <<<SCRIPT
+function format(state) {
+    if (!state.id) return state.text; // optgroup
+
+    return state.text;
+}
+SCRIPT;
+                $escape = new JsExpression("function(m){return m;}");
+                $this->registerJs($format, \yii\web\View::POS_HEAD);
+                ?>
+                <?php
+                $url = \yii\helpers\Url::toRoute(['/site/child-university']);
+                echo $form->field($user_education,'education_type_id')->widget(Select2::class,[
+                    'data' => $user_education->getEducationTypeName(),
+                    'options' => [
+                        'placeholder' => 'Select Education Type',
+                        'onchange' => '
+                                       $.post("'.$url.'?id="+$(this).val(), function( data ) {
+                    $("select#usercurrenteducation-university_id").html( data );
+                });'
+                    ],
+                    'pluginOptions' => [
+                        'templateResult' => new JsExpression('format'),
+                        'templateSelection' => new JsExpression('format'),
+                        'escapeMarkup' => $escape,
+                        'allowClear' => false,
+                    ],
                 ])?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($user_education,'university_id')->widget(\kartik\select2\Select2::class,[
-                        'data' => $user_education->getEducationTypeName(),
+                <?= $form->field($user_education,'university_id')->widget(Select2::class,[
                         'options' => [
                                 'placeholder' => 'Select University Name',
                                 'allowClear' => true,
