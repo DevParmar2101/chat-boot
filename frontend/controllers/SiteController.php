@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\StudyingUniversityName;
 use common\models\User;
 use common\models\UserCurrentEducation;
 use frontend\models\ResendVerificationEmailForm;
@@ -398,5 +399,30 @@ class SiteController extends Controller
         return $this->render('dev',[
             'user' => $user
         ]);
+    }
+
+    public function actionChildUniversity($id)
+    {
+        $countModel = StudyingUniversityName::find()->where(['type_id'=>$id])->count();
+
+        $model = StudyingUniversityName::find()->where(['type_id'=>$id])->orderBy(['id'=>SORT_ASC])->all();
+        $data = [];
+
+        if ($countModel > 0){
+            foreach ($model as $key){
+                $data[$key->id] = $key->university_name;
+            }
+            asort($data);
+            echo "<option></option>";
+            foreach ($data as $key=>$val){
+                if(!empty($val)){
+                    echo "<option value='".$key."'>".$val."</option>";
+                }
+
+            }
+        }
+        else{
+            echo "<option></option>";
+        }
     }
 }
