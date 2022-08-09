@@ -127,4 +127,5 @@ class UserCurrentEducation extends BaseActiveRecord
     {
         return ArrayHelper::map(StudyingType::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','studying_type_name');
     }
+
 }
