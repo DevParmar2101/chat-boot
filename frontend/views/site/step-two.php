@@ -24,21 +24,19 @@ use yii\web\View;
                 $format = <<<SCRIPT
 function format(state) {
     if (!state.id) return state.text; // optgroup
-
     return state.text;
 }
 SCRIPT;
                 $escape = new JsExpression("function(m){return m;}");
-                $this->registerJs($format, \yii\web\View::POS_HEAD);
+                $this->registerJs($format, View::POS_HEAD);
                 ?>
                 <?php
-                $url = \yii\helpers\Url::toRoute(['/site/child-university']);
+                $url = Url::toRoute(['/site/child-data']);
                 echo $form->field($user_education,'education_type_id')->widget(Select2::class,[
                     'data' => $user_education->getEducationTypeName(),
                     'options' => [
                         'placeholder' => 'Select Education Type',
-                        'onchange' => '
-                                       $.post("'.$url.'?id="+$(this).val(), function( data ) {
+                        'onchange' => '$.post("'.$url.'?id="+$(this).val(), function( data ) {
                     $("select#usercurrenteducation-university_id").html( data );
                 });'
                     ],
@@ -51,11 +49,30 @@ SCRIPT;
                 ])?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($user_education,'university_id')->widget(Select2::class,[
-                        'options' => [
-                                'placeholder' => 'Select University Name',
-                                'allowClear' => true,
-                        ]
+                <?php
+                $format =<<<SCRIPT
+function format(state) {
+    if (!state.id) return state.text;
+    return state.text;
+}
+SCRIPT;
+                $escape = new JsExpression("function(m){return m;}");
+                $this->registerJs($format, View::POS_HEAD);
+                ?>
+                <?php $url = Url::toRoute(['/site/child-data']);
+                echo $form->field($user_education,'university_id')->widget(Select2::class,[
+                    'options' => [
+                        'placeholder' => 'Select Field Type',
+                        'onchange' => '$.post("'.$url.'?id="$(this).val(), function( data ){
+                                    $("select#usercurrenteducation-studying_field_id").html( data );
+                                    });'
+                    ],
+                    'pluginOptions' => [
+                        'templateResult' => new JsExpression('format'),
+                        'templateSelection' => new JsExpression('format'),
+                        'escapeMarkup' => $escape,
+                        'allowClear' => false,
+                    ],
                 ])?>
             </div>
         </div>
