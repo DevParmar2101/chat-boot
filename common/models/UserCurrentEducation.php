@@ -29,6 +29,8 @@ use yii\helpers\ArrayHelper;
 class UserCurrentEducation extends BaseActiveRecord
 {
     const STEP_ONE = 1;
+    const STEP_TWO = 2;
+    const STEP_THREE = 3;
     /**
      * {@inheritdoc}
      */
@@ -46,6 +48,8 @@ class UserCurrentEducation extends BaseActiveRecord
             [['education_type_id', 'university_id', 'studying_field_id', 'studying_branch_id', 'user_id'], 'integer'],
             [['first_name','last_name','mobile_number'],'string'],
             [['first_name','last_name','mobile_number'],'required','on' => self::STEP_ONE],
+            [['education_type_id','university_id'],'required','on' => self::STEP_TWO],
+            [['studying_field_id','studying_branch_id'],'required', 'on' => self::STEP_THREE],
             [['created_at'], 'safe'],
             [['last_year_percentage'], 'string', 'max' => 11],
             [['education_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingType::className(), 'targetAttribute' => ['education_type_id' => 'id']],
