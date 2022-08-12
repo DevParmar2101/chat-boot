@@ -20,6 +20,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\web\UploadedFile;
+use function Symfony\Component\String\u;
 
 /**
  * Site controller
@@ -131,7 +132,6 @@ class SiteController extends Controller
         Yii::$app->view->title = 'Form Step Two';
         $user_id = Yii::$app->user->identity->id;
         $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
-        $user_education->scenario = $user_education::STEP_TWO;
         $card_title = 'Education Type & University Name';
         $form_information = 'Please give same detail as in your college.';
         $step = 2;
@@ -143,6 +143,10 @@ class SiteController extends Controller
             'form_information' => $form_information,
             'step' => $step,
         ];
+        if (!$user_education){
+            return $this->actionStepOne();
+        }
+        $user_education->scenario = $user_education::STEP_TWO;
         if ($renderAjax) {
             return  $this->renderAjax($this->educationView,$content);
         }
@@ -166,7 +170,6 @@ class SiteController extends Controller
         Yii::$app->view->title = 'From Step Three';
         $user_id = Yii::$app->user->identity->id;
         $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
-        $user_education->scenario = $user_education::STEP_THREE;
         $card_title = 'Current Field & Branch';
         $form_information = 'Please give same detail as in your college.';
         $step = 3;
@@ -178,6 +181,10 @@ class SiteController extends Controller
             'form_information' => $form_information,
             'step' => $step,
         ];
+        if (!$user_education){
+            return $this->actionStepTwo();
+        }
+        $user_education->scenario = $user_education::STEP_TWO;
         if ($renderAjax) {
             return $this->renderAjax($this->educationView,$content);
         }
