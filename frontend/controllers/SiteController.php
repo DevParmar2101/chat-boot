@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\StudyingFieldName;
 use common\models\StudyingUniversityName;
 use common\models\User;
 use common\models\UserCurrentEducation;
@@ -9,6 +10,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -146,7 +148,7 @@ class SiteController extends Controller
         if (!$user_education){
             return $this->actionStepOne();
         }
-        $user_education->scenario = $user_education::STEP_TWO;
+//        $user_education->scenario = $user_education::STEP_TWO;
         if ($renderAjax) {
             return  $this->renderAjax($this->educationView,$content);
         }
