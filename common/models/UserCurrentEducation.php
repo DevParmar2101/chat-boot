@@ -127,9 +127,21 @@ class UserCurrentEducation extends BaseActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    /**
+     * @return array
+     */
     public function getEducationTypeName()
     {
         return ArrayHelper::map(StudyingType::find()->where(['status' => BaseActiveRecord::STATUS_ACTIVE])->all(),'id','studying_type_name');
+    }
+
+    /**
+     * @param $university_id
+     * @return array
+     */
+    public function getEducationFieldName($university_id)
+    {
+        return ArrayHelper::map(StudyingFieldName::find()->where(['university_id'=>$university_id])->all(),'id','field_name');
     }
 
 }
