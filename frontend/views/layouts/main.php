@@ -116,7 +116,6 @@ AppAsset::register($this);
 
     <?php $this->endBody() ?>
     <?php
-    $product_url = Url::toRoute(['site/add-multiple-distance']);
     $js_pjax =<<<JS
 $.pjax.defaults.scrollTo=false;
 $("body").bind("ajaxComplete", function(e, xhr, settings){
@@ -144,7 +143,7 @@ $(document).on('submit', 'form[data-pjax-custom]', function(event) {
         "replace":false,
         "timeout":false,
         "scrollTo":false,
-        "container":'#'+pjaxId
+        "container":"#"+pjaxId
     });
 });
 $(document).on('pjax:send', function() {
@@ -159,31 +158,6 @@ $("body").on("submit", "form", function() {
     });
     return true;
 });
-
-
-    $(document).on('click',".btn-add-product",function(){  
-        var product = $(this).data('product');
-        var div = $(this).data('div');
-        var counter = 'counter-'+ div;
-        var value_counter = $('.'+counter).val();
-        var new_value_counter = 0;
-
-        if(!value_counter){
-            value_counter = 1;
-        }
-         new_value_counter = parseInt(value_counter)+1;
-        console.log(product);
-        console.log(div);
-        console.log(counter);
-        console.log(value_counter);
-        console.log(new_value_counter);
-        $('.'+counter).val(new_value_counter);
-        $.get("$product_url?id="+product+"&value="+value_counter, function(data, status){
-            $("#"+div).append(data);
-            $(".sub-product-title-"+product).removeClass('d-none');
-            $(".product-price-"+product).addClass('d-none');
-        });
-    });
 JS;
     $this->registerJs($js_pjax)
     ?>
