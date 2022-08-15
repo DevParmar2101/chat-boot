@@ -26,7 +26,9 @@ CrudAsset::register($this);
             <?= $this->render('@app/views/site/'.$view_name,[
                 'user' => isset($user) ? $user : null,
                 'user_education'=> isset($user_education) ? $user_education : null,
+                'card_title' => isset($card_title) ? $card_title : null,
                 'form_information' => isset($form_information) ? $form_information : null,
+                'step' => isset($step) ? $step : null,
             ])?>
 
         </div>

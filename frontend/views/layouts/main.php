@@ -159,8 +159,8 @@ $("body").on("submit", "form", function() {
     return true;
 });
 JS;
-    $this->registerJs($js_pjax)
+    $this->registerJs($js_pjax);
     ?>
     </body>
     </html>
-<?php $this->endPage();
+<?php $this->endPage(); ?>

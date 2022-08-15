@@ -149,9 +149,6 @@ class SiteController extends Controller
             'form_information' => $form_information,
             'step' => $step,
         ];
-        if (!$user_education){
-            return $this->actionStepOne();
-        }
         $user_education->scenario = $user_education::STEP_TWO;
         if ($renderAjax) {
             return  $this->renderAjax($this->educationView,$content);
@@ -160,6 +157,10 @@ class SiteController extends Controller
             if ($user_education->load(Yii::$app->request->post())) {
                 if ($user_education->save()){
                     return $this->actionStepThree(true);
+                }else{
+                    echo '<pre>';
+                    print_r($user_education);
+                    die();
                 }
             }
         }else{
@@ -187,9 +188,7 @@ class SiteController extends Controller
             'form_information' => $form_information,
             'step' => $step,
         ];
-        if (!$user_education){
-            return $this->actionStepTwo();
-        }
+
         $user_education->scenario = $user_education::STEP_THREE;
         if ($renderAjax) {
             return $this->renderAjax($this->educationView,$content);
@@ -198,6 +197,10 @@ class SiteController extends Controller
             if ($user_education->load(Yii::$app->request->post())) {
                 if ($user_education->save()) {
                     return $this->actionStepFour(true);
+                }else{
+                    echo '<pre>';
+                    print_r($user_education);
+                    die();
                 }
             }
         }else{
@@ -276,10 +279,9 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $is_guest = Yii::$app->user->isGuest;
-        if (!$is_guest){
-            $user_current_education = UserCurrentEducation::findOne(['user' => Yii::$app->user->identity->id]);
-        }
+        $user_current_education ='';
         if (!$is_guest) {
+            $user_current_education = UserCurrentEducation::findOne(['user' => Yii::$app->user->identity->id]);
             return $this->goHome();
         }
         $model = new LoginForm();
