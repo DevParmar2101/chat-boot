@@ -116,7 +116,8 @@ AppAsset::register($this);
 
     <?php $this->endBody() ?>
     <?php
-    $js_pjax =<<<JS
+    $product_url = Url::toRoute(['site/add-multiple-distance']);
+    $js_pjax = <<<JS
 $.pjax.defaults.scrollTo=false;
 $("body").bind("ajaxComplete", function(e, xhr, settings){
     var handleMinHeight = function() {
@@ -136,14 +137,15 @@ $(document).on('submit', 'form[data-pjax-custom]', function(event) {
     if(!pjaxId){
         pjaxId = 'id-setup-process';
     }
-    $.pjax.submit(event, {
+    
+    var dev=$.pjax.submit(event, {
         "pushRedirect": true,
         "replaceRedirect": false,
         "push":false,
         "replace":false,
         "timeout":false,
         "scrollTo":false,
-        "container":"#"+pjaxId
+        "container":'#'+pjaxId,
     });
 });
 $(document).on('pjax:send', function() {
@@ -158,6 +160,7 @@ $("body").on("submit", "form", function() {
     });
     return true;
 });
+
 JS;
     $this->registerJs($js_pjax);
     ?>
