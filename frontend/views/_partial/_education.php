@@ -20,7 +20,7 @@ CrudAsset::register($this);
         <div class="card-header">
             <h4><?= $card_title?:'Card Title'?></h4>
             <hr>
-            <span class="text-sm-left text-secondary">Step <?= $step?>/4</span>
+            <span class="text-sm-left text-secondary">Step <?= $step?>/5</span>
         </div>
         <div class="card">
             <?= $this->render('@app/views/site/'.$view_name,[
