@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\StudyingBranchName;
 use common\models\StudyingFieldName;
 use common\models\StudyingUniversityName;
 use common\models\User;
@@ -96,7 +97,10 @@ class SiteController extends Controller
         Yii::$app->view->title = 'Form Step One';
         $user_id = Yii::$app->user->identity->id;
         $user = User::findOne(['id' => $user_id]);
-        $user_education = new UserCurrentEducation();
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        if (!$user_education){
+            $user_education = new UserCurrentEducation();
+        }
         $user_education->scenario = $user_education::STEP_ONE;
 
         $card_title = 'Your Current Education';
@@ -148,7 +152,7 @@ class SiteController extends Controller
         if (!$user_education){
             return $this->actionStepOne();
         }
-//        $user_education->scenario = $user_education::STEP_TWO;
+        $user_education->scenario = $user_education::STEP_TWO;
         if ($renderAjax) {
             return  $this->renderAjax($this->educationView,$content);
         }
@@ -186,7 +190,7 @@ class SiteController extends Controller
         if (!$user_education){
             return $this->actionStepTwo();
         }
-        $user_education->scenario = $user_education::STEP_TWO;
+        $user_education->scenario = $user_education::STEP_THREE;
         if ($renderAjax) {
             return $this->renderAjax($this->educationView,$content);
         }
@@ -207,7 +211,62 @@ class SiteController extends Controller
      */
     public function actionStepFour($renderAjax = false)
     {
+        Yii::$app->view->title = 'From Step Four';
+        $user_id = Yii::$app->user->identity->id;
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        $card_title = 'Current Field & Branch';
+        $form_information = 'Please give same detail as in your college.';
+        $step = 4;
+        $content = [
+            'view_name' => 'step-four',
+            'user' => null,
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
+            'step' => $step,
+        ];
+        if (!$user_education){
+            return $this->actionStepTwo();
+        }
+        $user_education->scenario = $user_education::STEP_FOUR;
+        if ($renderAjax) {
+            return $this->renderAjax($this->educationView,$content);
+        }
+        if (Yii::$app->request->isPost) {
+            if ($user_education->load(Yii::$app->request->post())) {
+                $user_education->created_at = date('Y-m-d');
+                if ($user_education->save()) {
+                    return $this->actionVerifyDetail(true);
+                }
+            }
+        }else{
+            return $this->render($this->educationView,$content);
+        }
+    }
 
+    public function actionVerifyDetail($renderAjax = false)
+    {
+        Yii::$app->view->title = 'View Details';
+        $user_id = Yii::$app->user->identity->id;
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        $card_title = 'Verify YOur Detail';
+        $form_information = 'Please verify your details and press confirm';
+        $step = 5;
+        $content = [
+            'view_name' => 'verify-detail',
+            'user' => null,
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
+            'step' => $step
+        ];
+        if (!$user_education) {
+            return $this->actionStepOne();
+        }
+        if ($renderAjax) {
+            return $this->renderAjax($this->educationView,$content);
+        }
+        return $this->render($this->educationView,$content);
     }
     /**
      * Logs in a user.
@@ -444,7 +503,11 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionChildData($id)
+    /**
+     * @param $id
+     * @return void
+     */
+    public function actionChildUniversity($id)
     {
             $countModel = StudyingUniversityName::find()->where(['type_id' => $id])->count();
             $model = StudyingUniversityName::find()->where(['type_id' => $id])->orderBy(['id' => SORT_ASC])->all();
@@ -453,6 +516,28 @@ class SiteController extends Controller
         if ($countModel > 0){
             foreach ($model as $key){
                 $data[$key->id] = $key->university_name;
+            }
+            asort($data);
+            echo "<option></option>";
+            foreach ($data as $key=>$val){
+                if(!empty($val)){
+                    echo "<option value='".$key."'>".$val."</option>";
+                }
+            }
+        }
+        else{
+            echo "<option></option>";
+        }
+    }
+    public function actionChildBranchName($id)
+    {
+        $countModel = StudyingBranchName::find()->where(['field_id' => $id])->count();
+        $model = StudyingBranchName::find()->where(['field_id' => $id])->orderBy(['id' => SORT_ASC])->all();
+
+        $data = [];
+        if ($countModel > 0){
+            foreach ($model as $key){
+                $data[$key->id] = $key->branch_name;
             }
             asort($data);
             echo "<option></option>";

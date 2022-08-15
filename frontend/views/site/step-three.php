@@ -13,8 +13,6 @@ use yii\web\View;
 /** @var $user_education UserCurrentEducation*/
 /** @var $form_information*/
 ?>
-
-
 <?php $form = ActiveForm::begin(['id'=>'step-three-form'])?>
     <div class="card-body">
         <p><?= $form_information?></p>
@@ -31,7 +29,7 @@ SCRIPT;
                 $this->registerJs($format, View::POS_HEAD);
                 ?>
                 <?php
-                $url = Url::toRoute(['/site/child-data']);
+                $url = Url::toRoute(['/site/child-branch-name']);
                 echo $form->field($user_education,'studying_field_id')->widget(Select2::class,[
                     'data' => $user_education->getEducationFieldName($user_education->university_id),
                     'options' => [

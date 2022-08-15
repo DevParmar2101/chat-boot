@@ -31,7 +31,7 @@ SCRIPT;
                 $this->registerJs($format, View::POS_HEAD);
                 ?>
                 <?php
-                $url = Url::toRoute(['/site/child-data']);
+                $url = Url::toRoute(['/site/child-university']);
                 echo $form->field($user_education,'education_type_id')->widget(Select2::class,[
                     'data' => $user_education->getEducationTypeName(),
                     'options' => [

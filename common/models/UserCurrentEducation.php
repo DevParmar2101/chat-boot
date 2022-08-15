@@ -31,6 +31,7 @@ class UserCurrentEducation extends BaseActiveRecord
     const STEP_ONE = 1;
     const STEP_TWO = 2;
     const STEP_THREE = 3;
+    const STEP_FOUR = 4;
     /**
      * {@inheritdoc}
      */
@@ -46,16 +47,26 @@ class UserCurrentEducation extends BaseActiveRecord
     {
         return [
             [['education_type_id', 'university_id', 'studying_field_id', 'studying_branch_id', 'user_id'], 'integer'],
+
             [['first_name','last_name','mobile_number'],'string'],
+
+            [['created_at','education_type_id','university_id','studying_field_id','studying_branch_id'], 'safe'],
+
             [['first_name','last_name','mobile_number'],'required','on' => self::STEP_ONE],
             [['education_type_id','university_id'],'required','on' => self::STEP_TWO],
             [['studying_field_id','studying_branch_id'],'required', 'on' => self::STEP_THREE],
-            [['created_at'], 'safe'],
+            [['last_year_percentage'],'required', 'on' => self::STEP_FOUR],
+
             [['last_year_percentage'], 'string', 'max' => 11],
+
             [['education_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingType::className(), 'targetAttribute' => ['education_type_id' => 'id']],
+
             [['university_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingUniversityName::className(), 'targetAttribute' => ['university_id' => 'id']],
+
             [['studying_field_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingFieldName::className(), 'targetAttribute' => ['studying_field_id' => 'id']],
+
             [['studying_branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudyingBranchName::className(), 'targetAttribute' => ['studying_branch_id' => 'id']],
+
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
