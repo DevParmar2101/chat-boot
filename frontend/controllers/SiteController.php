@@ -228,9 +228,6 @@ class SiteController extends Controller
             'form_information' => $form_information,
             'step' => $step,
         ];
-        if (!$user_education){
-            return $this->actionStepTwo();
-        }
         $user_education->scenario = $user_education::STEP_FOUR;
         if ($renderAjax) {
             return $this->renderAjax($this->educationView,$content);
