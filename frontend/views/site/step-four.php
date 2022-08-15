@@ -31,3 +31,4 @@ $js_page_reload = <<<JS
 window.history.pushState('', '', "$current_page_url");
 JS;
 $this->registerJs($js_page_reload);
+?>
