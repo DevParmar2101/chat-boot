@@ -138,6 +138,9 @@ class UserCurrentEducation extends BaseActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getFullName(){
+        return $this->first_name.' '.$this->last_name;
+    }
     /**
      * @return array
      */
