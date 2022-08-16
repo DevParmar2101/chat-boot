@@ -69,6 +69,12 @@
         opacity: 0 !important;
     }
 }
+
 .help-block.help-block-error {
     color: rgb(211, 16, 16) !important;
+}
+
+table, th, td {
+    border: 1px solid black !important;
+    padding: 5px !important;
 }

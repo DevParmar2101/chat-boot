@@ -46,7 +46,8 @@ use yii\web\View;
         </tr>
     </table>
 </div>
-<div class="card-footer">
+
+    <div class="card-footer">
     <?= \yii\helpers\Html::a('Verify & Submit',['site/index'],['class' => 'btn btn-primary'])?>
 </div>
 <?php
