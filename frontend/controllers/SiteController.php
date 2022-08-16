@@ -239,11 +239,15 @@ class SiteController extends Controller
                     return $this->actionVerifyDetail(true);
                 }
             }
-        }else{
-            return $this->render($this->educationView,$content);
+        } else {
+            return $this->render($this->educationView, $content);
         }
     }
 
+    /**
+     * @param $renderAjax
+     * @return string|null
+     */
     public function actionVerifyDetail($renderAjax = false)
     {
         Yii::$app->view->title = 'View Details';
@@ -264,10 +268,19 @@ class SiteController extends Controller
             return $this->actionStepOne();
         }
         if ($renderAjax) {
-            return $this->renderAjax($this->educationView,$content);
+            return $this->renderAjax($this->educationView, $content);
         }
-        return $this->render($this->educationView,$content);
+        return $this->render($this->educationView, $content);
     }
+
+    public function actionCurrentEducation()
+    {
+        $model = UserCurrentEducation::findOne(['user_id' => Yii::$app->user->identity->id]);
+        return $this->render('current-education', [
+            'model' => $model
+        ]);
+    }
+
     /**
      * Logs in a user.
      *
@@ -276,7 +289,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $is_guest = Yii::$app->user->isGuest;
-        $user_current_education ='';
+        $user_current_education = '';
         if (!$is_guest) {
             $user_current_education = UserCurrentEducation::findOne(['user' => Yii::$app->user->identity->id]);
             return $this->goHome();

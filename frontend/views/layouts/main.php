@@ -45,16 +45,20 @@ AppAsset::register($this);
                                     <a class="nav-link text-white" href="<?= Url::toRoute('/site/about')?>">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="<?= Url::toRoute('/site/contact')?>">Contact</a>
+                                    <a class="nav-link text-white"
+                                       href="<?= Url::toRoute('/site/contact') ?>">Contact</a>
                                 </li>
                             </ul>
                             <div class="dropdown">
-                                <a class="nav-link dropdown-toggle profile-header-dropdown" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <?= Yii::$app->user->identity->username?>
+                                <a class="nav-link dropdown-toggle profile-header-dropdown" href="#"
+                                   id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <?= Yii::$app->user->identity->username ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="<?= Url::toRoute('site/profile')?>">Profile</a>
-                                    <?= Html::a('Logout', Url::to(['site/logout']),['data-method' => 'POST','class' => 'dropdown-item'])?>
+                                    <?= Html::a('Profile', ['site/profile'], ['class' => 'dropdown-item']) ?>
+                                    <?= Html::a('Current Education', ['site/current-education'], ['class' => 'dropdown-item']) ?>
+                                    <?= Html::a('Logout', Url::to(['site/logout']), ['data-method' => 'POST', 'class' => 'dropdown-item']) ?>
                                 </div>
                             </div>
                         </ul>
