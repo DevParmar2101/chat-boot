@@ -249,7 +249,7 @@ class SiteController extends Controller
         Yii::$app->view->title = 'View Details';
         $user_id = Yii::$app->user->identity->id;
         $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
-        $card_title = 'Verify YOur Detail';
+        $card_title = 'Verify Your Detail';
         $form_information = 'Please verify your details and press confirm';
         $step = 5;
         $content = [
