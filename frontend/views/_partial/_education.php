@@ -14,7 +14,6 @@ use johnitvn\ajaxcrud\CrudAsset;
  */
 CrudAsset::register($this);
 ?>
-
 <?php Pjax::begin(['id' => 'id-setup-process','enablePushState' => false,'scrollTo' => false]); ?>
     <div class="card mx-auto" style="display:block; width: 45rem">
         <div class="card-header">
