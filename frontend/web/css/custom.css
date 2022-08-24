@@ -84,3 +84,7 @@ table, th, td {
     height: 175px;
     margin-top: 25px;
 }
+
+.profile {
+    width: 15% !important;
+}
