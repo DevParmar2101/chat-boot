@@ -155,7 +155,24 @@ class UserCurrentEducation extends BaseActiveRecord
      */
     public function getEducationFieldName($university_id)
     {
-        return ArrayHelper::map(StudyingFieldName::find()->where(['university_id'=>$university_id])->all(),'id','field_name');
+        return ArrayHelper::map(StudyingFieldName::find()->where(['university_id' => $university_id])->all(), 'id', 'field_name');
     }
 
+    /**
+     * @param $condition
+     * @param $user_id
+     * @return array
+     */
+    public static function usersList()
+    {
+        $user_id = Yii::$app->user->identity->id;
+        UserCurrentEducation::findOne(['user_id' => $user_id]);
+        $model = UserCurrentEducation::find()
+            ->where(['education_type_id' => $user_current_education->education_type_id])
+            ->orWhere(['university_id' => $user_current_education->university_id])
+            ->orWhere(['studying_field_id' => $user_current_education->studying_field_id])
+            ->orWhere(['studying_branch_id' => $user_current_education->studying_branch_id])
+            ->andWhere(['not in', UserCurrentEducation::tableName() . '.user_id', [$user_id]]);
+        return $model;
+    }
 }

@@ -12,6 +12,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
@@ -80,23 +81,26 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
         $guest = Yii::$app->user->isGuest;
-        $user_id = Yii::$app->user->identity->id;
         if ($guest) {
             return $this->render('index');
         } else {
-            $user = User::findOne(['id' => $user_id]);
-            $searchModel = new UserCurrentEducationSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $user_id = Yii::$app->user->identity->id;
+            $user_current_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+            $query = UserCurrentEducation::find()
+                ->where(['education_type_id' => $user_current_education->education_type_id])
+                ->orWhere(['university_id' => $user_current_education->university_id])
+                ->orWhere(['studying_field_id' => $user_current_education->studying_field_id])
+                ->orWhere(['studying_branch_id' => $user_current_education->studying_branch_id])
+                ->andWhere(['not in', UserCurrentEducation::tableName() . '.user_id', [$user_id]]);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
             return $this->render('user-list', [
-                'user' => $user,
-                'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
         }
