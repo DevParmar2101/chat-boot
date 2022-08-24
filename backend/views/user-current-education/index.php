@@ -29,19 +29,48 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'education_type_id',
-            'university_id',
-            'studying_field_id',
-            'studying_branch_id',
-            //'last_year_percentage',
-            //'user_id',
-            //'created_at',
+            [
+                'attribute' => 'education_type_id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->educationType->studying_type_name;
+                }
+            ],
+            [
+                'attribute' => 'university_id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->university->university_name;
+                }
+            ],
+            [
+                'attribute' => 'studying_field_id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->studyingField->field_name;
+                }
+            ],
+            [
+                'attribute' => 'studying_branch_id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->studyingBranch->branch_name;
+                }
+            ],
+            'last_year_percentage',
+            [
+                'attribute' => 'user_id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->user->getFullName();
+                }
+            ],
+            'created_at:date',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, UserCurrentEducation $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
