@@ -78,3 +78,9 @@ table, th, td {
     border: 1px solid black !important;
     padding: 5px !important;
 }
+
+.user-profile {
+    width: 200px;
+    height: 175px;
+    margin-top: 25px;
+}

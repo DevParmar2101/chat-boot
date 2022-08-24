@@ -288,14 +288,10 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $is_guest = Yii::$app->user->isGuest;
-        $user_current_education = '';
-        if (!$is_guest) {
-            $user_current_education = UserCurrentEducation::findOne(['user' => Yii::$app->user->identity->id]);
-            return $this->goHome();
-        }
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $user_current_education = UserCurrentEducation::findOne(['user_id' => Yii::$app->user->identity->id]);
             if ($user_current_education){
                 return $this->goBack();
             }else{

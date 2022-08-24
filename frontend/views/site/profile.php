@@ -54,7 +54,7 @@ $this->title = 'User Profile';
                 <?= $form->field($model,'profile_image')->widget(FileInput::class,[
                     'pluginOptions' => [
                         'initialPreviewData' => true,
-                        'initialPreview' => Html::img(Yii::getAlias('@web/uploads/user/'.$model->profile_image),['class' => 'img-thumbnail']),
+                        'initialPreview' => Html::img(Yii::getAlias('@web/uploads/user/' . $model->profile_image), ['class' => 'img-thumbnail user-profile']),
                         'showUpload' => false,
                         'browseLabel' => '',
                         'removeLabel' => '',
