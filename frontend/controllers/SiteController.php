@@ -7,6 +7,7 @@ use common\models\StudyingFieldName;
 use common\models\StudyingUniversityName;
 use common\models\User;
 use common\models\UserCurrentEducation;
+use common\models\UserCurrentEducationSearch;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -86,10 +87,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $guest = Yii::$app->user->isGuest;
+        $user_id = Yii::$app->user->identity->id;
         if ($guest) {
             return $this->render('index');
         } else {
-            return $this->render('user-list');
+            $user = User::findOne(['id' => $user_id]);
+            $searchModel = new UserCurrentEducationSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            return $this->render('user-list', [
+                'user' => $user,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
         }
     }
 
