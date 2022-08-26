@@ -599,8 +599,19 @@ class SiteController extends Controller
         }
         return false;
     }
+
+    /**
+     * @return string
+     */
     public function actionUserRequest()
     {
-        return $this->render('chat-request');
+        $user_id = Yii::$app->user->identity->id;
+        $query = UserRequest::find()->where(['user_id' => $user_id])->andWhere(['status' => BaseActiveRecord::STATUS_INACTIVE]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        return $this->render('chat-request',[
+            'dataProvider' => $dataProvider
+        ]);
     }
 }
