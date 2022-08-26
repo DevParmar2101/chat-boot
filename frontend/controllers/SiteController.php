@@ -575,7 +575,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @return bool|void
+     * @return false|string
      * @throws StaleObjectException
      */
     public function actionUserList()
@@ -592,16 +592,12 @@ class SiteController extends Controller
                 $model->user_requested_to_id = $data['user_requested_to_id'];
                 $model->status = BaseActiveRecord::STATUS_INACTIVE;
                 $model->requested_at = date('Y-m-d');
-                if ($model->save()) {
+                $model->save();
                     return 'Success';
-                } else {
-                    echo '<pre>';
-                    print_r($model->firstErrors);
-                    die();
-                }
             }
-        } else {
             return false;
         }
+
+        return false;
     }
 }
