@@ -1,9 +1,13 @@
 <?php
 
 use common\models\UserCurrentEducation;
+use common\models\UserRequest;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /** @var $model UserCurrentEducation */
+$user_request = UserRequest::findOne(['user_id' => Yii::$app->user->identity->id, 'user_requested_to_id' => $model->user_id]);
 ?>
 <div class="row">
     <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-xs-12 mb-4">
@@ -19,8 +23,9 @@ use yii\helpers\Html;
                         <p class="m-0"><span>Age:-</span><?= $model->user->age ?></p>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 text-right">
-                        <a class="btn btn-<?= '' ? 'secondary' : 'primary' ?> user-button-request"
-                           id="request-<?= $model->user_id ?>"><?= '' ? 'Requested' : 'Request' ?></a>
+                        <?= Html::a($user_request ? 'Requested' : 'Request', ['site/user-list'], ['class' => $user_request ? 'btn btn-secondary' : 'btn btn-primary']) ?>
+                        <a class="btn btn-<?= $user_request ? 'secondary' : 'primary' ?> user-button-request"
+                           id="request-<?= $model->user_id ?>"><?= $user_request ? 'Requested' : 'Request' ?></a>
                     </div>
                 </div>
             </div>

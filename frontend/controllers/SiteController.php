@@ -584,7 +584,7 @@ class SiteController extends Controller
             $data = Yii::$app->request->post();
             $user_id = Yii::$app->user->identity->id;
             $model = UserRequest::findOne(['user_id' => $user_id, 'user_requested_to_id' => $data['user_requested_to_id']]);
-            if ($model) {
+            if ($model && $model->user_id == $user_id && $model->user_requested_to_id == $data['user_requested_to_id']) {
                 $model->delete();
             } else {
                 $model = new UserRequest();
@@ -592,8 +592,13 @@ class SiteController extends Controller
                 $model->user_requested_to_id = $data['user_requested_to_id'];
                 $model->status = BaseActiveRecord::STATUS_INACTIVE;
                 $model->requested_at = date('Y-m-d');
-                $model->save();
-                return true;
+                if ($model->save()) {
+                    return 'Success';
+                } else {
+                    echo '<pre>';
+                    print_r($model->firstErrors);
+                    die();
+                }
             }
         } else {
             return false;
