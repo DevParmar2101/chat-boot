@@ -19,7 +19,8 @@ use yii\helpers\Html;
                         <p class="m-0"><span>Age:-</span><?= $model->user->age ?></p>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 text-right">
-                        <button class="btn btn-primary">Request</button>
+                        <a class="btn btn-<?= '' ? 'secondary' : 'primary' ?> user-button-request"
+                           id="request-<?= $model->user_id ?>"><?= '' ? 'Requested' : 'Request' ?></a>
                     </div>
                 </div>
             </div>
