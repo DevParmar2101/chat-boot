@@ -2,17 +2,20 @@
 
 namespace frontend\controllers;
 
+use common\models\BaseActiveRecord;
 use common\models\StudyingBranchName;
 use common\models\StudyingFieldName;
 use common\models\StudyingUniversityName;
 use common\models\User;
 use common\models\UserCurrentEducation;
 use common\models\UserCurrentEducationSearch;
+use common\models\UserRequest;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
+use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
@@ -33,6 +36,7 @@ use function Symfony\Component\String\u;
 class SiteController extends Controller
 {
     public $educationView = '@app/views/_partial/_education';
+
     /**
      * {@inheritdoc}
      */
@@ -175,10 +179,6 @@ class SiteController extends Controller
             if ($user_education->load(Yii::$app->request->post())) {
                 if ($user_education->save()){
                     return $this->actionStepThree(true);
-                }else{
-                    echo '<pre>';
-                    print_r($user_education);
-                    die();
                 }
             }
         }else{
@@ -215,10 +215,6 @@ class SiteController extends Controller
             if ($user_education->load(Yii::$app->request->post())) {
                 if ($user_education->save()) {
                     return $this->actionStepFour(true);
-                }else{
-                    echo '<pre>';
-                    print_r($user_education);
-                    die();
                 }
             }
         }else{
@@ -313,7 +309,7 @@ class SiteController extends Controller
             if ($user_current_education){
                 return $this->goBack();
             }else{
-              return $this->redirect(['step-one']);
+                return $this->redirect(['step-one']);
             }
         }
         $model->password = '';
@@ -321,6 +317,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
     /**
      * Logs out the current user.
      *
@@ -535,8 +532,8 @@ class SiteController extends Controller
      */
     public function actionChildUniversity($id)
     {
-            $countModel = StudyingUniversityName::find()->where(['type_id' => $id])->count();
-            $model = StudyingUniversityName::find()->where(['type_id' => $id])->orderBy(['id' => SORT_ASC])->all();
+        $countModel = StudyingUniversityName::find()->where(['type_id' => $id])->count();
+        $model = StudyingUniversityName::find()->where(['type_id' => $id])->orderBy(['id' => SORT_ASC])->all();
 
         $data = [];
         if ($countModel > 0){
@@ -545,16 +542,16 @@ class SiteController extends Controller
             }
             asort($data);
             echo "<option></option>";
-            foreach ($data as $key=>$val){
+            foreach ($data as $key=> $val){
                 if(!empty($val)){
                     echo "<option value='".$key."'>".$val."</option>";
                 }
             }
-        }
-        else{
+        } else{
             echo "<option></option>";
         }
     }
+
     public function actionChildBranchName($id)
     {
         $countModel = StudyingBranchName::find()->where(['field_id' => $id])->count();
@@ -567,14 +564,39 @@ class SiteController extends Controller
             }
             asort($data);
             echo "<option></option>";
-            foreach ($data as $key=>$val){
-                if(!empty($val)){
-                    echo "<option value='".$key."'>".$val."</option>";
+            foreach ($data as $key => $val) {
+                if (!empty($val)) {
+                    echo "<option value='" . $key . "'>" . $val . "</option>";
                 }
             }
-        }
-        else{
+        } else {
             echo "<option></option>";
+        }
+    }
+
+    /**
+     * @return bool|void
+     * @throws StaleObjectException
+     */
+    public function actionUserList()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $user_id = Yii::$app->user->identity->id;
+            $model = UserRequest::findOne(['user_id' => $user_id, 'user_requested_to_id' => $data['user_requested_to_id']]);
+            if ($model) {
+                $model->delete();
+            } else {
+                $model = new UserRequest();
+                $model->user_id = $data['user_id'];
+                $model->user_requested_to_id = $data['user_requested_to_id'];
+                $model->status = BaseActiveRecord::STATUS_INACTIVE;
+                $model->requested_at = date('Y-m-d');
+                $model->save();
+                return true;
+            }
+        } else {
+            return false;
         }
     }
 }
