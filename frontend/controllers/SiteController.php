@@ -112,118 +112,6 @@ class SiteController extends Controller
 
     /**
      * @param $renderAjax
-     * @return string|void
-     */
-    public function actionStepOne($renderAjax = false)
-    {
-        Yii::$app->view->title = 'Form Step One';
-        $user_id = Yii::$app->user->identity->id;
-        $user = User::findOne(['id' => $user_id]);
-        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
-        if (!$user_education){
-            $user_education = new UserCurrentEducation();
-        }
-        $user_education->scenario = $user_education::STEP_ONE;
-
-        $card_title = 'Your Current Education';
-        $form_information = 'Please give same detail as in your college.';
-        $step = 1;
-
-        $content = [
-            'view_name' => 'step-one',
-            'user' =>   $user,
-            'user_education' => $user_education,
-            'card_title' => $card_title,
-            'form_information' => $form_information,
-            'step' => $step,
-        ];
-        if ($renderAjax){
-            return $this->renderAjax($this->educationView, $content);
-        }
-        if (Yii::$app->request->isPost){
-            if ($user_education->load(Yii::$app->request->post())){
-                $user_education->user_id = $user_id;
-                if ($user_education->save()) {
-                    return $this->actionStepTwo(true);
-                }
-            }
-        }else{
-            return $this->render($this->educationView,$content);
-        }
-    }
-
-    /**
-     * @param $renderAjax
-     * @return string|void|null
-     */
-    public function actionStepTwo($renderAjax = false){
-        Yii::$app->view->title = 'Form Step Two';
-        $user_id = Yii::$app->user->identity->id;
-        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
-        $card_title = 'Education Type & University Name';
-        $form_information = 'Please give same detail as in your college.';
-        $step = 2;
-        $content = [
-            'view_name' => 'step-two',
-            'user' => null,
-            'user_education' => $user_education,
-            'card_title' => $card_title,
-            'form_information' => $form_information,
-            'step' => $step,
-        ];
-        $user_education->scenario = $user_education::STEP_TWO;
-        if ($renderAjax) {
-            return  $this->renderAjax($this->educationView,$content);
-        }
-        if (Yii::$app->request->isPost){
-            if ($user_education->load(Yii::$app->request->post())) {
-                if ($user_education->save()){
-                    return $this->actionStepThree(true);
-                }
-            }
-        }else{
-            return $this->render($this->educationView,$content);
-        }
-    }
-
-    /***
-     * @param $renderAjax
-     * @return string|void|null
-     */
-    public function actionStepThree($renderAjax = false)
-    {
-        Yii::$app->view->title = 'From Step Three';
-        $user_id = Yii::$app->user->identity->id;
-        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
-        $card_title = 'Current Field & Branch';
-        $form_information = 'Please give same detail as in your college.';
-        $step = 3;
-        $content = [
-            'view_name' => 'step-three',
-            'user' => null,
-            'user_education' => $user_education,
-            'card_title' => $card_title,
-            'form_information' => $form_information,
-            'step' => $step,
-        ];
-
-        $user_education->scenario = $user_education::STEP_THREE;
-        if ($renderAjax) {
-            return $this->renderAjax($this->educationView,$content);
-        }
-        if (Yii::$app->request->isPost) {
-            if ($user_education->load(Yii::$app->request->post())) {
-                if ($user_education->save()) {
-                    return $this->actionStepFour(true);
-                }
-            }
-        }else{
-            return $this->render($this->educationView,$content);
-        }
-    }
-
-    /**
-     * @param $renderAjax
      * @return string|void|null
      */
     public function actionStepFour($renderAjax = false)
@@ -575,6 +463,118 @@ class SiteController extends Controller
     }
 
     /**
+     * @param $renderAjax
+     * @return string|void
+     */
+    public function actionStepOne($renderAjax = false)
+    {
+        Yii::$app->view->title = 'Form Step One';
+        $user_id = Yii::$app->user->identity->id;
+        $user = User::findOne(['id' => $user_id]);
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        if (!$user_education){
+            $user_education = new UserCurrentEducation();
+        }
+        $user_education->scenario = $user_education::STEP_ONE;
+
+        $card_title = 'Your Current Education';
+        $form_information = 'Please give same detail as in your college.';
+        $step = 1;
+
+        $content = [
+            'view_name' => 'step-one',
+            'user' =>   $user,
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
+            'step' => $step,
+        ];
+        if ($renderAjax){
+            return $this->renderAjax($this->educationView, $content);
+        }
+        if (Yii::$app->request->isPost){
+            if ($user_education->load(Yii::$app->request->post())){
+                $user_education->user_id = $user_id;
+                if ($user_education->save()) {
+                    return $this->actionStepTwo(true);
+                }
+            }
+        }else{
+            return $this->render($this->educationView,$content);
+        }
+    }
+
+    /**
+     * @param $renderAjax
+     * @return string|void|null
+     */
+    public function actionStepTwo($renderAjax = false){
+        Yii::$app->view->title = 'Form Step Two';
+        $user_id = Yii::$app->user->identity->id;
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        $card_title = 'Education Type & University Name';
+        $form_information = 'Please give same detail as in your college.';
+        $step = 2;
+        $content = [
+            'view_name' => 'step-two',
+            'user' => null,
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
+            'step' => $step,
+        ];
+        $user_education->scenario = $user_education::STEP_TWO;
+        if ($renderAjax) {
+            return  $this->renderAjax($this->educationView,$content);
+        }
+        if (Yii::$app->request->isPost){
+            if ($user_education->load(Yii::$app->request->post())) {
+                if ($user_education->save()){
+                    return $this->actionStepThree(true);
+                }
+            }
+        }else{
+            return $this->render($this->educationView,$content);
+        }
+    }
+
+    /***
+     * @param $renderAjax
+     * @return string|void|null
+     */
+    public function actionStepThree($renderAjax = false)
+    {
+        Yii::$app->view->title = 'From Step Three';
+        $user_id = Yii::$app->user->identity->id;
+        $user_education = UserCurrentEducation::findOne(['user_id' => $user_id]);
+        $card_title = 'Current Field & Branch';
+        $form_information = 'Please give same detail as in your college.';
+        $step = 3;
+        $content = [
+            'view_name' => 'step-three',
+            'user' => null,
+            'user_education' => $user_education,
+            'card_title' => $card_title,
+            'form_information' => $form_information,
+            'step' => $step,
+        ];
+
+        $user_education->scenario = $user_education::STEP_THREE;
+        if ($renderAjax) {
+            return $this->renderAjax($this->educationView,$content);
+        }
+        if (Yii::$app->request->isPost) {
+            if ($user_education->load(Yii::$app->request->post())) {
+                if ($user_education->save()) {
+                    return $this->actionStepFour(true);
+                }
+            }
+        }else{
+            return $this->render($this->educationView,$content);
+        }
+    }
+
+    /**
      * @return false|string
      * @throws StaleObjectException
      */
@@ -597,7 +597,10 @@ class SiteController extends Controller
             }
             return false;
         }
-
         return false;
+    }
+    public function actionUserRequest()
+    {
+        return $this->render('chat-request');
     }
 }

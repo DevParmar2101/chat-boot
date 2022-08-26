@@ -57,7 +57,7 @@ AppAsset::register($this);
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <?= Html::a('Profile', ['site/profile'], ['class' => 'dropdown-item']) ?>
-                                    <?= Html::a('Current Education', ['site/current-education'], ['class' => 'dropdown-item']) ?>
+                                    <?= Html::a('Chat Requests', ['site/user-request'], ['class' => 'dropdown-item']) ?>
                                     <?= Html::a('Logout', Url::to(['site/logout']), ['data-method' => 'POST', 'class' => 'dropdown-item']) ?>
                                 </div>
                             </div>

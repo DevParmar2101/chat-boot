@@ -23,7 +23,7 @@ $user_request = UserRequest::findOne(['user_id' => Yii::$app->user->identity->id
                         <p class="m-0"><span>Age:-</span><?= $model->user->age ?></p>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 text-right">
-                        <a class="btn btn-<?= $user_request ? 'secondary' : 'primary' ?> user-button-request"
+                        <a href="javascript:void(0)" class="btn btn-<?= $user_request ? 'secondary' : 'primary' ?> user-button-request"
                            id="request-<?= $model->user_id ?>"><?= $user_request ? 'Requested' : 'Request' ?></a>
                     </div>
                 </div>
