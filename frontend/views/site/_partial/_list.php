@@ -24,8 +24,6 @@ $user_request = UserRequest::findOne(['user_id' => Yii::$app->user->identity->id
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 text-right">
                         <?= Html::a($user_request ? 'Requested' : 'Request', ['site/user-list'], ['class' => $user_request ? 'btn btn-secondary' : 'btn btn-primary']) ?>
-                        <a class="btn btn-<?= $user_request ? 'secondary' : 'primary' ?> user-button-request"
-                           id="request-<?= $model->user_id ?>"><?= $user_request ? 'Requested' : 'Request' ?></a>
                     </div>
                 </div>
             </div>
